@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "boilercircle-ecbd4"
+    "default": "boilercircle-ecbd4",
+    "bc": "boilercircle-ecbd4"
   }
 }
