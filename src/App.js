@@ -1,19 +1,63 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import firebase, { auth, provider } from './fire.js';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+	super();
+ 	this.login = this.login.bind(this);
+	this.logout = this.logout.bind(this);
+	this.state = {
+		currentItem: '',
+		username: '',
+		items: [],
+		user: null
+	}
+  }
+
+  componentDidMount(){
+	auth.onAuthStateChanged((user) => {
+		if(user){
+			this.setState({ user });
+		}
+	});
+  }
+
+  handleChange(e){
+
+  }
+
+  logout(){
+	auth.signOut()
+	  .then(() => {
+		this.setState({
+			user: null
+		});
+	     });
+  }
+
+  login(){
+	auth.signInWithPopup(provider)
+	  .then((result) => {
+		const user = result.user;
+		this.setState({
+		  user
+		});
+	      });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+     <div className='app'>
+	<header>
+      		<div className="wrapper">
+        	<h1>BoilerCircle</h1>
+		{this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>
+		}
+      		</div>
+	</header>
+     </div>
     );
   }
 }
