@@ -1,4 +1,4 @@
-# Bartr
+# BoilerCircle
 
 Social media without the clutter, and an emphasis on your interests
 
