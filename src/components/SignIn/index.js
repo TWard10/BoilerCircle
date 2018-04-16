@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import firebase, { auth, provider } from './fire.js';
-import './App.css';
+import { compose } from 'recompose'
+import logo from '../../logo.svg';
+import firebase, { auth, provider } from '../../fire.js';
+import './index.css';
 
-class App extends Component {
+class SignIn extends Component {
   constructor(){
 	super();
  	this.login = this.login.bind(this);
@@ -62,4 +63,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export default compose(
+)(SignIn);

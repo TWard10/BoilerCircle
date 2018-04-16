@@ -14,5 +14,11 @@
     "deploy": "firebase deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2"
   }
 }
