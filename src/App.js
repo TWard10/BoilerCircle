@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import firebase, { auth, provider } from './fire.js';
 import './App.css';
-
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter,
+    Switch
+  } from "react-router-dom";
+import Home from './Components/Home.js'
 class App extends Component {
   constructor(){
 	super();
@@ -53,8 +61,10 @@ class App extends Component {
 	<header>
       		<div className="wrapper">
         	<h1>BoilerCircle</h1>
-		{this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>
-		}
+		        {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>
+		        }
+            
+
       		</div>
 	</header>
      </div>
