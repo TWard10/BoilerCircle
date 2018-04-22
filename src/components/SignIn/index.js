@@ -1,5 +1,26 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+import { compose } from 'recompose'
+import logo from '../../logo.svg';
+import firebase, { auth, provider } from '../../fire.js';
+import './index.css';
+import image from'./img.png';
+
+class SignIn extends Component {
+  constructor(){
+	super();
+ 	this.login = this.login.bind(this);
+	this.logout = this.logout.bind(this);
+	this.state = {
+		currentItem: '',
+		username: '',
+		items: [],
+		user: null
+	}
+  }
+=======
 import { withRouter } from 'react-router-dom';
+>>>>>>> 377cbc9ca285f7c96da6a47ea5a5e7e68a98d8fa
 
 import { SignUpLink } from '../SignUp';
 import { auth } from '../../firebase';

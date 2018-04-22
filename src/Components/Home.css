@@ -106,36 +106,8 @@
   background: #fff;
 
 }
-.text {
-  font-size: 3em;
-  font-family: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosBold', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:600; font-stretch:normal;
-	font-style: italic;
-	color: black;
-  width: 850px
-}
 
-.container {
-	background-color: #e6e600;
-	position: absolute;
-  left:450px;
-
-  top: 0px;
-	padding: 15px;
-}
-.container2 {
-	background-color: #e6e600;
-	position: absolute;
-  left:450px;
-
-  top: 200px;
-	padding: 15px;
-}
-
-
-.outer_container {
-	text-align: center;
-}
-
-.hidden {
-	visibility: hidden;
+.outer {
+  overflow: hidden;
+  position: relative;
 }
