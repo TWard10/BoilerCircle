@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { firebase } from '../../firebase';
-
+//imports
 import SignInPage from '../SignIn';
 import HomePage from '../Home';
 import Navigation from '../Navigation';
