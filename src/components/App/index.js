@@ -9,6 +9,8 @@ import LandingPage from '../LandingPage';
 import SignUpPage from '../SignUp';
 import * as routes from '../../constants';
 import withAuthentication from '../../withAuthentication';
+import InterPage from '../IntComp';
+//import inter from '../Interests/ints'
 
 import './index.css';
 
@@ -31,6 +33,7 @@ const App = () =>
 			<Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
 			<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
 			<Route exact path={routes.HOME} component={() => <HomePage />} />
+			<Route exact path={routes.INTER} component={() => <InterPage  />}  />
 		</div>
     </Router>
 export default withAuthentication(App);
