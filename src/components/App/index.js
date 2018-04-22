@@ -11,6 +11,11 @@ import * as routes from '../../constants';
 import withAuthentication from '../../withAuthentication';
 //more imports
 import './index.css';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
 
 const NoMatch = ({ location }) => (
 	<div>
@@ -20,17 +25,40 @@ const NoMatch = ({ location }) => (
 	</div>
 );
 
-const App = () =>
-	<Router>
-	    <div>
-			<Navigation />
+class App extends Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			open: false
+		}
+	}
+	render(){
+			return(
+				<Router>
+				    <div>
+						<Navigation />
 
-			<hr/>
-
-			<Route exact path={routes.LANDING} component={() => <LandingPage />} />
-			<Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
-			<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
-			<Route exact path={routes.HOME} component={() => <HomePage />} />
-		</div>
-    </Router>
+						<hr/><div>
+						<MuiThemeProvider muiTheme={getMuiTheme()}>
+							 <AppBar
+									 title="Boiler Circle"
+									 onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
+																/>
+							 <Drawer open={this.state.open}
+								 docked = {false}
+								 onRequestChange={(open)=>this.setState({open})}>
+								 <MenuItem>Menu Item</MenuItem>
+								 <MenuItem>Menu Item2</MenuItem>
+								 </Drawer>
+						</MuiThemeProvider>
+						</div>
+						<Route exact path={routes.LANDING} component={() => <LandingPage />} />
+						<Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
+						<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+						<Route exact path={routes.HOME} component={() => <HomePage />} />
+					</div>
+			    </Router>
+				)
+	}
+}
 export default withAuthentication(App);

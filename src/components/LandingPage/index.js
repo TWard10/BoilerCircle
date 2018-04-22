@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const LandingPage = () =>
-    <div>
-        <h1>Landing Page</h1>
-    </div>
 
-export default LandingPage;
+export default class LandingPage extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      open: false
+    }
+  }
+    render(){
+      return(
+            <div> hi </div>
+      )
+    }
+}
