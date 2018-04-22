@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { compose } from 'recompose'
 import logo from '../../logo.svg';
 import firebase, { auth, provider } from '../../fire.js';
@@ -17,68 +18,97 @@ class SignIn extends Component {
 		user: null
 	}
   }
+=======
+import { withRouter } from 'react-router-dom';
+>>>>>>> 377cbc9ca285f7c96da6a47ea5a5e7e68a98d8fa
 
-  componentDidMount(){
-	auth.onAuthStateChanged((user) => {
-		if(user){
-			this.setState({ user });
-		}
-	});
+import { SignUpLink } from '../SignUp';
+import { auth } from '../../firebase';
+import * as routes from '../../constants';
+
+const SignInPage = ({ history }) =>
+  <div>
+    <h1>SignIn</h1>
+    <SignInForm history={history} />
+    <SignUpLink />
+  </div>
+
+const byPropKey = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
+
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  error: null,
+};
+
+class SignInForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { ...INITIAL_STATE };
   }
 
-  handleChange(e){
+  onSubmit = (event) => {
+    const {
+      email,
+      password,
+    } = this.state;
 
-  }
+    const {
+      history,
+    } = this.props;
 
-  logout(){
-	auth.signOut()
-	  .then(() => {
-		this.setState({
-			user: null
-		});
-	     });
-  }
+    auth.doSignInWithEmailAndPassword(email, password)
+      .then(() => {
+				this.setState(() => ({ ...INITIAL_STATE }));
+				history.push(routes.HOME);
+      })
+      .catch(error => {
+        this.setState(byPropKey('error', error));
+      });
 
-  login(){
-	auth.signInWithPopup(provider)
-	  .then((result) => {
-		const user = result.user;
-		this.setState({
-		  user
-		});
-	      });
+    event.preventDefault();
   }
 
   render() {
-      console.log("image", image);
+    const {
+      email,
+      password,
+      error,
+    } = this.state;
+
+    const isInvalid =
+      password === '' ||
+      email === '';
+
     return (
-        <div className = 'app'>
-          <header className = "app-header">
-            <div className="wrapper">
-              <h1>BoilerCircle</h1>
-            </div>
-          </header>
-          <div>
-            <div className="row">
-              <div className="column ">
-                <div className = "bigCircle" >
-                </div>
+      <form onSubmit={this.onSubmit}>
+        <input
+          value={email}
+          onChange={event => this.setState(byPropKey('email', event.target.value))}
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          value={password}
+          onChange={event => this.setState(byPropKey('password', event.target.value))}
+          type="password"
+          placeholder="Password"
+        />
+        <button disabled={isInvalid} type="submit">
+          Sign In
+        </button>
 
-              </div>
-                <div>
-                <div className = "toptext"> Boiler Link</div>
-                <div className = "bodytext"> Our mission is to connect you with <br/>other Boilers you might not have a <br/>chance to otherwise.  Pick your <br/>interests and get connected! </div>
-                {this.state.user ? <button className = "logcircle" onClick={this.logout}><b className = "circletextcd D">Log Out</b></button> : <button className = "logcircle" onClick={this.login}><b className = "circletextcd D">Log In</b></button>
-            		}
-
-            </div>
-            <div className= 'image' > <img src={image} alt="BoilerMaker" /> </div>
-        </div>
-        </div>
-        </div>
+        { error && <p>{error.message}</p> }
+      </form>
     );
   }
 }
 
-export default compose(
-)(SignIn);
+export default withRouter(SignInPage);
+
+export {
+  SignInForm,
+};

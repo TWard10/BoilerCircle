@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { firebase } from '../../firebase';
 
-import SignIn from '../SignIn';
-import * as routes from '../../constants'
+import SignInPage from '../SignIn';
+import HomePage from '../Home';
+import Navigation from '../Navigation';
+import LandingPage from '../LandingPage';
+import SignUpPage from '../SignUp';
+import * as routes from '../../constants';
+import withAuthentication from '../../withAuthentication';
 
 import './index.css';
 
@@ -20,12 +22,15 @@ const NoMatch = ({ location }) => (
 
 const App = () =>
 	<Router>
-		<div className="app">
-			<Switch>
-				<Route exact path={routes.SIGN_IN} component={SignIn} />
-			</Switch>
-			<hr />
-		</div>
-	</Router>
+	    <div>
+			<Navigation />
 
-export default App;
+			<hr/>
+
+			<Route exact path={routes.LANDING} component={() => <LandingPage />} />
+			<Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
+			<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+			<Route exact path={routes.HOME} component={() => <HomePage />} />
+		</div>
+    </Router>
+export default withAuthentication(App);
