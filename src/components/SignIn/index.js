@@ -1,67 +1,93 @@
 import React, { Component } from 'react';
-import { compose } from 'recompose'
-import logo from '../../logo.svg';
-import firebase, { auth, provider } from '../../fire.js';
-import './index.css';
+import { withRouter } from 'react-router-dom';
 
-class SignIn extends Component {
-  constructor(){
-	super();
- 	this.login = this.login.bind(this);
-	this.logout = this.logout.bind(this);
-	this.state = {
-		currentItem: '',
-		username: '',
-		items: [],
-		user: null
-	}
+import { SignUpLink } from '../SignUp';
+import { auth } from '../../firebase';
+import * as routes from '../../constants';
+
+const SignInPage = ({ history }) =>
+  <div>
+    <h1>SignIn</h1>
+    <SignInForm history={history} />
+    <SignUpLink />
+  </div>
+
+const byPropKey = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
+
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  error: null,
+};
+
+class SignInForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { ...INITIAL_STATE };
   }
 
-  componentDidMount(){
-	auth.onAuthStateChanged((user) => {
-		if(user){
-			this.setState({ user });
-		}
-	});
-  }
+  onSubmit = (event) => {
+    const {
+      email,
+      password,
+    } = this.state;
 
-  handleChange(e){
+    const {
+      history,
+    } = this.props;
 
-  }
+    auth.doSignInWithEmailAndPassword(email, password)
+      .then(() => {
+				this.setState(() => ({ ...INITIAL_STATE }));
+				history.push(routes.HOME);
+      })
+      .catch(error => {
+        this.setState(byPropKey('error', error));
+      });
 
-  logout(){
-	auth.signOut()
-	  .then(() => {
-		this.setState({
-			user: null
-		});
-	     });
-  }
-
-  login(){
-	auth.signInWithPopup(provider)
-	  .then((result) => {
-		const user = result.user;
-		this.setState({
-		  user
-		});
-	      });
+    event.preventDefault();
   }
 
   render() {
+    const {
+      email,
+      password,
+      error,
+    } = this.state;
+
+    const isInvalid =
+      password === '' ||
+      email === '';
+
     return (
-     <div className='app'>
-	<header>
-      		<div className="wrapper">
-        	<h1>BoilerCircle</h1>
-		{this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>
-		}
-      		</div>
-	</header>
-     </div>
+      <form onSubmit={this.onSubmit}>
+        <input
+          value={email}
+          onChange={event => this.setState(byPropKey('email', event.target.value))}
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          value={password}
+          onChange={event => this.setState(byPropKey('password', event.target.value))}
+          type="password"
+          placeholder="Password"
+        />
+        <button disabled={isInvalid} type="submit">
+          Sign In
+        </button>
+
+        { error && <p>{error.message}</p> }
+      </form>
     );
   }
 }
 
-export default compose(
-)(SignIn);
+export default withRouter(SignInPage);
+
+export {
+  SignInForm,
+};

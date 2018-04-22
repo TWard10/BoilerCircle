@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 var config = {
     apiKey: "AIzaSyAwWoby7yaH7o8MKsunzjeXFy6ly-OdW-Q",
@@ -7,9 +7,12 @@ var config = {
     projectId: "boilercircle-ecbd4",
     storageBucket: "boilercircle-ecbd4.appspot.com",
     messagingSenderId: "798938919270"
-};
+  };
 var fire = firebase.initializeApp(config);
-export const provider = new firebase.auth.GoogleAuthProvider();
-export const auth = firebase.auth();
-export default fire;
+const db = fire.database();
+const auth = firebase.auth();
+export {
+    db,
+    auth
+};
 
