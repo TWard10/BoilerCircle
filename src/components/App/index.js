@@ -11,11 +11,10 @@ import * as routes from '../../constants';
 import withAuthentication from '../../withAuthentication';
 //more imports
 import './index.css';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+
+
+
+
 
 const NoMatch = ({ location }) => (
 	<div>
@@ -24,6 +23,8 @@ const NoMatch = ({ location }) => (
 		</h3>
 	</div>
 );
+
+
 
 class App extends Component {
 	constructor(props){
@@ -38,20 +39,7 @@ class App extends Component {
 				    <div>
 						<Navigation />
 
-						<hr/><div>
-						<MuiThemeProvider muiTheme={getMuiTheme()}>
-							 <AppBar
-									 title="Boiler Circle"
-									 onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
-																/>
-							 <Drawer open={this.state.open}
-								 docked = {false}
-								 onRequestChange={(open)=>this.setState({open})}>
-								 <MenuItem>Menu Item</MenuItem>
-								 <MenuItem>Menu Item2</MenuItem>
-								 </Drawer>
-						</MuiThemeProvider>
-						</div>
+						<hr/>
 						<Route exact path={routes.LANDING} component={() => <LandingPage />} />
 						<Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
 						<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
