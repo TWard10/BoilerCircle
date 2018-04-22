@@ -7,6 +7,8 @@ import HomePage from '../Home';
 import Navigation from '../Navigation';
 import LandingPage from '../LandingPage';
 import SignUpPage from '../SignUp';
+import AccountPage from '../Account';
+import PasswordForgetPage from '../PasswordForget';
 import * as routes from '../../constants';
 import withAuthentication from '../../withAuthentication';
 //more imports
@@ -24,29 +26,19 @@ const NoMatch = ({ location }) => (
 	</div>
 );
 
+const App = () =>
+	<Router>
+	    <div>
+			<Navigation />
 
+			<hr/>
 
-class App extends Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			open: false
-		}
-	}
-	render(){
-			return(
-				<Router>
-				    <div>
-						<Navigation />
-
-						<hr/>
-						<Route exact path={routes.LANDING} component={() => <LandingPage />} />
-						<Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
-						<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
-						<Route exact path={routes.HOME} component={() => <HomePage />} />
-					</div>
-			    </Router>
-				)
-	}
-}
+			<Route exact path={routes.LANDING} component={() => <LandingPage />} />
+			<Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
+			<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+			<Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetPage />} />
+			<Route exact path={routes.ACCOUNT} component={() => <AccountPage />} />
+			<Route exact path={routes.HOME} component={() => <HomePage />} />
+		</div>
+    </Router>
 export default withAuthentication(App);
