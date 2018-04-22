@@ -25,7 +25,7 @@ class Home extends Component {
               <div>
               <div className = "toptext"> Boiler Link</div>
               <div className = "bodytext"> Our mission is to connect you with <br/>other Boilers you might not have a <br/>chance to otherwise.  Pick your <br/>interests and get connected! </div>
-              <button className = "logcircle"><b className = "circletext">Log In</b></button>
+              <button className = "logcircle"><b className = "circletextcd D">Log In</b></button>
               </div>
 
           </div>
