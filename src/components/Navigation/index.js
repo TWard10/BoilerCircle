@@ -1,9 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AuthUserContext from '../../AuthUserContext';
 import * as routes from '../../constants';
 import SignOutButton from '../SignOut';
+
+import './index.css'
 
 const Navigation = ({ authUser }) =>
   <AuthUserContext.Consumer>
@@ -14,22 +16,46 @@ const Navigation = ({ authUser }) =>
   </AuthUserContext.Consumer>
 
 const NavigationAuth = () =>
-    <ul>
-        <li><Link to={routes.SIGN_IN}>Sign In</Link></li>
-        <li><Link to={routes.LANDING}>Landing</Link></li>
-        <li><Link to={routes.HOME}>Home</Link></li>
-        <li><Link to={routes.ACCOUNT}>Account</Link></li>
-        <li><SignOutButton /></li>
-    </ul>
+    <div className="buttonsGroup">
+      <Link to={routes.SIGN_IN}>Sign In</Link>
+      <Link to={routes.LANDING}>Landing</Link>
+      <Link to={routes.HOME}>Home</Link>
+      <Link to={routes.ACCOUNT}>Account</Link>
+      <SignOutButton />
+    </div>
 
 const NavigationNonAuth = () =>
-        <ul>
-            <li><Link to={routes.LANDING}>Landing</Link></li>
-            <li><Link to={routes.SIGN_IN}>Sign In</Link></li>
-        </ ul>
+        <div className="buttonsGroup">
+            <Link to={routes.LANDING}>Landing</Link>
+            <Link to={routes.SIGN_IN}>Sign In</Link>
+        </div>
+
+class NavigationHeader extends Component {
+  constructor(props, context){
+    super(props, context)
+    this.state={
+    }
+  }
+
+  render() {
+    console.log('Navigation Props:', this.props);
+    return (
+      <div className="navBar">
+        <Link to={this.props.authUser ? routes.HOME : routes.LANDING}>
+        </Link>
+        <div className="searchBar">
+          <input type="text" className="searchBarInput" placeholder="Search..."/>
+          <span role="img" aria-label="Search" className="searchBarButton">🔍</span>
+        </div>
+        { this.props.authUser ? <NavigationAuth /> : <NavigationNonAuth /> }
+      </div>
+    )
+  }
+}
+
 
 const mapStateToProps = (state) => ({
   authUser: state.sessionState.authUser,
 });
 
-export default connect(mapStateToProps)(Navigation);
+export default connect(mapStateToProps)(NavigationHeader);
