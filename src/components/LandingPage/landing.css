@@ -1,1 +1,7 @@
-
+.pageBackground {
+    background-color: rgb(244,227,183);
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    bottom: 32px;
+  }

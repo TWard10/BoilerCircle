@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import * as routes from '../../constants';
+import './landing.css';
 
 class LandingPage extends Component {
   constructor(props){
@@ -65,30 +66,31 @@ class LandingPage extends Component {
         margin: 12,
       }
       return(
-        <MuiThemeProvider muiTheme={muiTheme}>
-           <AppBar
-               title="Boiler Circle"
-               onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
-                            />
-           <Drawer open={this.state.open}
-             docked = {false}
-             onRequestChange={(open)=>this.setState({open})}>
-             <MenuItem onClick = {this.handleLading}>Landing</MenuItem>
-             <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
-             </Drawer>
+        <div className="pageBackground">
+          <MuiThemeProvider muiTheme={muiTheme}>
+            <AppBar
+                title="Boiler Circle"
+                onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
+                              />
+            <Drawer open={this.state.open}
+              docked = {false}
+              onRequestChange={(open)=>this.setState({open})}>
+              <MenuItem onClick = {this.handleLading}>Landing</MenuItem>
+              <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
+              </Drawer>
 
-                <div className='container'>
-                <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
-                  <h1>Boiler Circle</h1>
-                  <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
-                </Paper>
-                </div>
-                <div className='container'>
-                  <RaisedButton backgroundColor = "#424242" label="Sign In" onClick={this.handleSign} style={buttonStyle} />
-                  <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
+                  <div className='container'>
+                  <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
+                    <h1>Boiler Circle</h1>
+                    <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
+                  </Paper>
                   </div>
-        </MuiThemeProvider>
-
+                  <div className='container'>
+                    <RaisedButton backgroundColor = "#424242" label="Sign In" onClick={this.handleSign} style={buttonStyle} />
+                    <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
+                    </div>
+          </MuiThemeProvider>
+        </div> 
 
       )
     }
