@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import SearchField from './SearchField'
 import TextField from 'material-ui/TextField';
-import Typo from 'material-ui/Typography'
+//import Typo from 'material-ui/Typography'
 //import theme from 'material-ui/styles/getMuiTheme'
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 

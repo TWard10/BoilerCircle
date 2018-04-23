@@ -1,0 +1,108 @@
+.centerAlign {
+    padding-top: 10%;
+    text-align: center;
+}
+
+.formats {
+    text-decoration: none;
+    color: white !important;
+}
+
+.formats:hover {
+    color: rgb(185, 234, 217) !important;
+    transition: 0.2s linear;
+    cursor: pointer;
+}
+
+.signUpPageBackground {
+    background-color: rgb(244,227,183);
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    bottom: 32px;
+}
+
+.signUpBackground {
+    top: 15vh;
+    bottom: 15vh;
+    left: 39%;
+    right: 39%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    box-sizing: border-box;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    padding: 6vh 1vw 0vh 1vw;
+}
+
+.signUpButton {
+    text-align: center;
+    font-size: 1.1vw;
+    border: 0.0em solid white;
+    border-radius: 1em 1em 1em 1em;
+    background-color:  rgb(152, 112, 13);
+    color: white;
+    padding: 0.4em 1em;
+    outline: 0;
+    height: 5vh;
+    width: 15vw;
+}
+
+.signUpInfo input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    outline: none;
+    color: white;
+}
+
+.signUpInfo a {
+    text-decoration: none;
+    font-size: 14px;
+    color: white;
+}
+
+.centerSignUp {
+    text-align: center;
+    margin: auto;
+    padding-top: 30px;
+}
+
+.signUpAnchor {
+    width: 100%;
+    position : absolute;
+    bottom : 32px;
+}
+
+.signUpHeader {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 2.8vw;
+    color: white;
+}
+
+.noAccount {
+    font-size: 1.2vw;
+    position: absolute;
+    bottom: 2vh;
+    left: 1.25vw;
+}
+
+.textBoxReg {
+    font-size: 1.15vw;
+    height: 5vh;
+    width: 88%;
+    background-color: transparent;
+    border: none;
+    border-bottom: white solid 1px;
+    color: white;
+}
+
+.textBoxReg:focus {
+   outline: none;
+}
+
+.signUpError {
+    font-size: 0.75vw;
+}
