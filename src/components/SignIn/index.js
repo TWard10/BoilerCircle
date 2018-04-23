@@ -67,8 +67,8 @@ class SignInForm extends Component {
       error,
     } = this.state;
     const style = {
-      height: 400,
-      width: 400,
+      height: 500,
+      width: 350,
       margin: 50,
       padding: 60,
       textAlign: 'center',
@@ -103,9 +103,9 @@ class SignInForm extends Component {
         margin: 12,
       }
     return (
-      <div>
+      <div className = 'cetner'>
       <MuiThemeProvider muiTheme={muiTheme}>
-      <Paper style={style} zDepth={3} circle={true}>
+      <Paper style={style} zDepth={3} >
       <h1 className="loginHeader">LOG IN</h1>
       <form onSubmit={this.onSubmit}>
        <div className="emailBar">
