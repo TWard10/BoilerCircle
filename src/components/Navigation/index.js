@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AuthUserContext from '../../AuthUserContext';
 import * as routes from '../../constants';
@@ -10,7 +10,6 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-this.state = ({open: false});
 const muiTheme = getMuiTheme({
   "palette": {
         "primary1Color": "#ffeb3b",
@@ -33,7 +32,7 @@ const muiTheme = getMuiTheme({
         "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
     }
 });
-const Navigation = ({ authUser }) =>
+/*const Navigation = ({ authUser }) =>
   <AuthUserContext.Consumer>
     {authUser => authUser
       ? <NavigationAuth />
@@ -64,42 +63,62 @@ const Navigation = ({ authUser }) =>
         history,
     } = this.props;
     history.push(routes.ACCOUNT);
+  }*/
+
+
+
+class NavigationHeader extends Component {
+  constructor(props, context){
+    super(props, context)
+    this.state={
+      open: false
+    }
   }
 
-const NavigationAuth = () =>
-
-    <MuiThemeProvider muiTheme={muiTheme}>
-      <AppBar
-          title="Boiler Circle"
-          onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
-                        />
-      <Drawer open={this.state.open}
-        docked = {false}
-        onRequestChange={(open)=>this.setState({open})}>
-        <MenuItem onClick = {this.handleLanding}>Landing</MenuItem>
-        <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
-        <MenuItem onClick = {this.handleHome}>Home</MenuItem>
-        <MenuItem onClick = {this.handleAccount}>Account</MenuItem>
-        </Drawer>
-        </MuiThemeProvider>
-
-
-const NavigationNonAuth = () =>
-<MuiThemeProvider muiTheme={muiTheme}>
-  <AppBar
-      title="Boiler Circle"
-      onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
-   />
-  <Drawer open={this.state.open}
+  NavigationAuth = (open) =>
+  <MuiThemeProvider muiTheme={muiTheme}>
+    <AppBar
+        title="Boiler Circle"
+        onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
+                      />
+    <Drawer open={this.state.open}
       docked = {false}
       onRequestChange={(open)=>this.setState({open})}>
-      <MenuItem onClick = {this.handleLanding}>Landing</MenuItem>
-      <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
+      <Link to={routes.LANDING}><MenuItem>Landing</MenuItem></Link>
+      <Link to={routes.SIGN_IN}><MenuItem>Sign In</MenuItem></Link>
+      <Link to={routes.HOME}><MenuItem>Home</MenuItem></Link>
+      <Link to={routes.ACCOUNT}><MenuItem>Account</MenuItem></Link>
+      </Drawer>
+      </MuiThemeProvider>
+
+
+  NavigationNonAuth = () =>
+  <MuiThemeProvider muiTheme={muiTheme}>
+  <AppBar
+    title="Boiler Circle"
+    onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
+  />
+  <Drawer open={this.state.open}
+    docked = {false}
+    onRequestChange={(open)=>this.setState({open})}>
+    <MenuItem onClick = {this.handleLanding}>Landing</MenuItem>
+    <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
   </Drawer>
-</MuiThemeProvider>
+  </MuiThemeProvider>
+
+  render() {
+    console.log('Navigation Props:', this.props);
+    return (
+      <div>
+        { this.props.authUser ? this.NavigationAuth() : this.NavigationNonAuth() }
+      </div>
+    )
+  }
+}
+
 
 const mapStateToProps = (state) => ({
   authUser: state.sessionState.authUser,
 });
 
-export default connect(mapStateToProps)(Navigation);
+export default connect(mapStateToProps)(NavigationHeader);
