@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -8,7 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import * as routes from '../../constants';
 
-export default class LandingPage extends Component {
+class LandingPage extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -83,7 +84,7 @@ export default class LandingPage extends Component {
                 </Paper>
                 </div>
                 <div className='container'>
-                  <RaisedButton backgroundColor = "#424242" label="Sign In" style={buttonStyle} />
+                  <RaisedButton backgroundColor = "#424242" label="Sign In" onClick={this.handleSign} style={buttonStyle} />
                   <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
                   </div>
         </MuiThemeProvider>
@@ -92,3 +93,9 @@ export default class LandingPage extends Component {
       )
     }
 }
+
+export default withRouter(LandingPage);
+
+export {
+  LandingPage,
+};
