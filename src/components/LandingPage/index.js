@@ -26,7 +26,7 @@ export default class LandingPage extends Component {
     const {
         history,
     } = this.props;
-    history.push(routes.SIGN_IN);
+    this.history.push(routes.SIGN_IN);
   }
     render(){
       const muiTheme = getMuiTheme({
@@ -83,7 +83,7 @@ export default class LandingPage extends Component {
                 </Paper>
                 </div>
                 <div className='container'>
-                  <RaisedButton backgroundColor = "#424242" label="Sign In" style={buttonStyle} />
+                  <RaisedButton backgroundColor = "#424242" label="Sign In" style={buttonStyle} onClick = {this.handleSign}/>
                   <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
                   </div>
         </MuiThemeProvider>
