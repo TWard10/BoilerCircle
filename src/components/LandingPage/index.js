@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -7,27 +8,25 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import * as routes from '../../constants';
+import './landing.css';
 
-export default class LandingPage extends Component {
+class LandingPage extends Component {
   constructor(props){
     super(props)
     this.state = {
       open: false
     }
-  }
 
-  handleLanding = () =>{
-    const {
-        history,
-    } = this.props;
-    history.push(routes.LANDING);
+
   }
   handleSign = () =>{
     const {
         history,
     } = this.props;
-    this.history.push(routes.SIGN_IN);
+    history.push(routes.SIGN_IN);
   }
+
+
     render(){
       const muiTheme = getMuiTheme({
       	"palette": {
@@ -64,31 +63,28 @@ export default class LandingPage extends Component {
         margin: 12,
       }
       return(
-        <MuiThemeProvider muiTheme={muiTheme}>
-           <AppBar
-               title="Boiler Circle"
-               onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
-                            />
-           <Drawer open={this.state.open}
-             docked = {false}
-             onRequestChange={(open)=>this.setState({open})}>
-             <MenuItem onClick = {this.handleLading}>Landing</MenuItem>
-             <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
-             </Drawer>
+        <div className="pageBackground">
+          <MuiThemeProvider muiTheme={muiTheme}>
 
-                <div className='container'>
-                <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
-                  <h1>Boiler Circle</h1>
-                  <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
-                </Paper>
-                </div>
-                <div className='container'>
-                  <RaisedButton backgroundColor = "#424242" label="Sign In" style={buttonStyle} onClick = {this.handleSign}/>
-                  <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
+                  <div className='container'>
+                  <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
+                    <h1>Boiler Circle</h1>
+                    <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
+                  </Paper>
                   </div>
-        </MuiThemeProvider>
-
+                  <div className='container'>
+                    <RaisedButton backgroundColor = "#424242" label="Sign In" onClick={this.handleSign} style={buttonStyle} />
+                    <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
+                    </div>
+          </MuiThemeProvider>
+        </div>
 
       )
     }
 }
+
+export default withRouter(LandingPage);
+
+export {
+  LandingPage,
+};

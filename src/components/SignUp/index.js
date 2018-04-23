@@ -4,9 +4,10 @@ import { auth, db } from '../../firebase';
 
 import * as routes from '../../constants';
 
+import './index.css';
+
 const SignUpPage = ({ history }) =>
-  <div>
-    <h1>SignUp</h1>
+  <div className="signUpPageBackground">
     <SignUpForm history={history}/>
   </div>
 
@@ -39,7 +40,7 @@ class SignUpForm extends Component {
       const {
           history,
       } = this.props;
-  
+
       auth.doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(authUser => {
             db.doCreateUser(authUser.uid, username, email)
@@ -54,7 +55,7 @@ class SignUpForm extends Component {
         .catch(error => {
           this.setState(byPropKey('error', error));
         });
-  
+
       event.preventDefault();
   }
 
@@ -74,37 +75,47 @@ class SignUpForm extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-            <input
-            value={username}
-            onChange={event => this.setState(byPropKey('username', event.target.value))}
-            type="text"
-            placeholder="Full Name"
-            />
-            <input
-            value={email}
-            onChange={event => this.setState(byPropKey('email', event.target.value))}
-            type="text"
-            placeholder="Email Address"
-            />
-            <input
-            value={passwordOne}
-            onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
-            type="password"
-            placeholder="Password"
-            />
-            <input
-            value={passwordTwo}
-            onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
-            type="password"
-            placeholder="Confirm Password"
-            />
-            <button disabled={isInvalid} type="submit">
-            Sign Up
-            </button>
-
-            { error && <p>{error.message}</p> }
-      </form>
+      <div className="signUpBackground">
+        <h1 className="signUpHeader">SIGN UP</h1>
+          <form onSubmit={this.onSubmit}>
+               <div className="signUpInfo">
+                  <input
+                  className="textBoxReg"
+                  value={username}
+                  onChange={event => this.setState(byPropKey('username', event.target.value))}
+                  type="text"
+                  placeholder="Full Name"
+                  />
+                  <input
+                  className="textBoxReg"
+                  value={email}
+                  onChange={event => this.setState(byPropKey('email', event.target.value))}
+                  type="text"
+                  placeholder="Email Address"
+                  />
+                  <input
+                  className="textBoxReg"
+                  value={passwordOne}
+                  onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
+                  type="password"
+                  placeholder="Password"
+                  />
+                  <input
+                  className="textBoxReg"
+                  value={passwordTwo}
+                  onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
+                  type="password"
+                  placeholder="Confirm Password"
+                  />
+              </div>
+              <div className="centerSignUp">
+                  <button className="signUpButton" disabled={isInvalid} type="submit">
+                  Sign Up
+                  </button>
+              </div>
+                { error && <p>{error.message}</p> }
+          </form>
+      </div>
     );
   }
 }
