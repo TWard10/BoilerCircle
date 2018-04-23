@@ -16,13 +16,8 @@ class LandingPage extends Component {
     this.state = {
       open: false
     }
-  }
 
-  handleLanding = () =>{
-    const {
-        history,
-    } = this.props;
-    history.push(routes.LANDING);
+
   }
   handleSign = () =>{
     const {
@@ -30,6 +25,8 @@ class LandingPage extends Component {
     } = this.props;
     history.push(routes.SIGN_IN);
   }
+
+
     render(){
       const muiTheme = getMuiTheme({
       	"palette": {
@@ -68,16 +65,6 @@ class LandingPage extends Component {
       return(
         <div className="pageBackground">
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar
-                title="Boiler Circle"
-                onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
-                              />
-            <Drawer open={this.state.open}
-              docked = {false}
-              onRequestChange={(open)=>this.setState({open})}>
-              <MenuItem onClick = {this.handleLading}>Landing</MenuItem>
-              <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
-              </Drawer>
 
                   <div className='container'>
                   <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
@@ -90,7 +77,7 @@ class LandingPage extends Component {
                     <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
                     </div>
           </MuiThemeProvider>
-        </div> 
+        </div>
 
       )
     }

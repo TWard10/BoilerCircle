@@ -40,7 +40,7 @@ class SignUpForm extends Component {
       const {
           history,
       } = this.props;
-  
+
       auth.doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(authUser => {
             firebase.firestore().collection('users').doc(authUser.uid).set({
@@ -50,7 +50,7 @@ class SignUpForm extends Component {
         .catch(error => {
           this.setState(byPropKey('error', error));
         });
-  
+
       event.preventDefault();
   }
 
