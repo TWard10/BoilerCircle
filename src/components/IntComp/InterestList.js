@@ -1,7 +1,44 @@
 import React, { Component } from 'react'
+import './interestList.css'
+import RB from 'material-ui/RaisedButton'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+
+
+const muiTheme = getMuiTheme({
+        
+      "palette": {
+            "primary1Color": "#ffeb3b",
+            "primary2Color": "#ffeb3b",
+            "primary3Color": "#212121",
+            "accent1Color": "#fff9c4",
+            "accent2Color": "#eceff1",
+            "accent3Color": "rgba(255, 255, 255, 0.87)",
+            "borderColor": "#ffeb3b",
+            "canvasColor": "#424242",
+            "textColor": "#ffeb3b"
+        },
+        "appBar": {
+            "textColor": "#ffdc52",
+            "color": "#424242"
+        },
+        "menuItem": {
+            "selectedTextColor": "rgba(0, 0, 0, 0.26)",
+            "hoverColor": "#616161",
+            "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
+        },
+        "RaisedButton": {
+            "textColor": "#ffdc52",
+            "labelColor": "#424242",
+            "margin": "12",
+    },
+    });
 
 export default ({inter, initText, addint, pickedList}) =>{
-  
+
+    const style = {
+        margin: 12,
+      };
 
     const interList = inter
     .filter(inter => {
@@ -10,13 +47,20 @@ export default ({inter, initText, addint, pickedList}) =>{
     .map(inter => {
      
       return(
-       <li key = {inter.id}> <button
+        <MuiThemeProvider getMuiTheme={getMuiTheme}>
+            
+       
+       
+       <RB label={inter.inter}  style={style}
+        labelColor = "#ffdc52" backgroundColor = "#424242"
+
        onClick={() => addint(inter.id)}>
        
     
-       {inter.inter}
-       </button>
-       </li>
+       
+       </RB>
+       
+       </MuiThemeProvider>
      )
     });
 
