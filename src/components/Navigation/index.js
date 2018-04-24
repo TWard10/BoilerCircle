@@ -87,10 +87,10 @@ class NavigationHeader extends Component {
     <Drawer open={this.state.open}
       docked = {false}
       onRequestChange={(open)=>this.setState({open})}>
-      <Link to={routes.LANDING}><MenuItem>Landing</MenuItem></Link>
-      <Link to={routes.SIGN_IN}><MenuItem>Sign In</MenuItem></Link>
-      <Link to={routes.HOME}><MenuItem>Home</MenuItem></Link>
-      <Link to={routes.ACCOUNT}><MenuItem>Account</MenuItem></Link>
+      <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
+      <Link to={routes.SIGN_IN}  style={{ textDecoration: 'none' }}><MenuItem>Sign In</MenuItem></Link>
+      <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
+      <Link to={routes.ACCOUNT}  style={{ textDecoration: 'none' }}><MenuItem>Account</MenuItem></Link>
       </Drawer>
       </MuiThemeProvider>
 
@@ -105,8 +105,8 @@ class NavigationHeader extends Component {
   <Drawer open={this.state.open}
     docked = {false}
     onRequestChange={(open)=>this.setState({open})}>
-    <Link to={routes.LANDING}><MenuItem>Landing</MenuItem></Link>
-    <Link to={routes.SIGN_IN}><MenuItem>Sign In</MenuItem></Link>
+    <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
+    <Link to={routes.SIGN_IN}  style={{ textDecoration: 'none' }}><MenuItem>Sign In</MenuItem></Link>
   </Drawer>
   </MuiThemeProvider>
 

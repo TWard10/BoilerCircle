@@ -66,7 +66,7 @@ class LandingPage extends Component {
         <div className="pageBackground">
           <MuiThemeProvider muiTheme={muiTheme}>
 
-                  <div className='container'>
+                  <div className='center'>
                   <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
                     <h1>Boiler Circle</h1>
                     <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>

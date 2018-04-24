@@ -23,11 +23,11 @@
 }
 
 .signUpBackground {
-    top: 15vh;
-    bottom: 15vh;
+    top: 6.5vh;
+    bottom: 5vh;
     left: 39%;
     right: 39%;
-    background: rgba(0, 0, 0, 0.5);
+    background: #424242;
     color: #fff;
     position: absolute;
     box-sizing: border-box;
@@ -65,7 +65,7 @@
 .centerSignUp {
     text-align: center;
     margin: auto;
-    padding-top: 30px;
+  
 }
 
 .signUpAnchor {
@@ -79,7 +79,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 100;
     font-size: 2.8vw;
-    color: white;
+    color: #ffeb3b;
 }
 
 .noAccount {
