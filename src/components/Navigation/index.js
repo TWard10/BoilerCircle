@@ -101,8 +101,8 @@ class NavigationHeader extends Component {
   <Drawer open={this.state.open}
     docked = {false}
     onRequestChange={(open)=>this.setState({open})}>
-    <MenuItem onClick = {this.handleLanding}>Landing</MenuItem>
-    <MenuItem onClick = {this.handleSign}>Sign In</MenuItem>
+    <Link to={routes.LANDING}><MenuItem>Landing</MenuItem></Link>
+    <Link to={routes.SIGN_IN}><MenuItem>Sign In</MenuItem></Link>
   </Drawer>
   </MuiThemeProvider>
 

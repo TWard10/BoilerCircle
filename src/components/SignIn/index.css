@@ -83,3 +83,11 @@
   text-align: center;
   margin: auto;
 }
+.cetner {
+    top: 8%;
+    bottom: 13vh;
+    left: 25%;
+    right: 25%;
+    position: absolute;
+    padding: 6vh 1vw 0vh 1vw;
+}
