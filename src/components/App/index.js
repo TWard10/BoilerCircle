@@ -11,7 +11,9 @@ import AccountPage from '../Account';
 import PasswordForgetPage from '../PasswordForget';
 import * as routes from '../../constants';
 import withAuthentication from '../../withAuthentication';
-//more imports
+import InterPage from '../IntComp';
+//import inter from '../Interests/ints'
+
 import './index.css';
 
 
@@ -39,6 +41,7 @@ const App = () =>
 				<Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetPage />} />
 				<Route exact path={routes.ACCOUNT} component={() => <AccountPage />} />
 				<Route exact path={routes.HOME} component={() => <HomePage />} />
+				<Route exact path={routes.INTER} component={() => <InterPage  />}  />
 				<Route path="*" component={() => <LandingPage />} />
 			</Switch>
 		</div>

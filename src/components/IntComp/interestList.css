@@ -1,0 +1,27 @@
+.button{
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+}
+
+.ul{
+    marign: 0; 
+    padding: 0; 
+
+}
+
+.header{
+    background: #424242
+
+}
+
+.pageBackground {
+      background-color: rgb(244,227,183)
+   
+       
+      }
