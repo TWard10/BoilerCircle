@@ -9,6 +9,8 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { auth } from '../../firebase';
+import FlatButton from 'material-ui/FlatButton';
 
 const muiTheme = getMuiTheme({
   "palette": {
@@ -23,8 +25,8 @@ const muiTheme = getMuiTheme({
         "textColor": "#ffeb3b"
     },
     "appBar": {
-        "textColor": "#ffeb3b",
-        "color": "#616161"
+        "textColor": "#ffdc52",
+        "color": "#424242"
     },
     "menuItem": {
         "selectedTextColor": "rgba(0, 0, 0, 0.26)",
@@ -80,6 +82,7 @@ class NavigationHeader extends Component {
     <AppBar
         title="Boiler Circle"
         onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
+        iconElementRight={<FlatButton label="Sign Out" onClick={auth.doSignOut}/>}
                       />
     <Drawer open={this.state.open}
       docked = {false}
@@ -90,6 +93,7 @@ class NavigationHeader extends Component {
       <Link to={routes.ACCOUNT}><MenuItem>Account</MenuItem></Link>
       </Drawer>
       </MuiThemeProvider>
+
 
 
   NavigationNonAuth = () =>

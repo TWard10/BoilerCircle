@@ -39,6 +39,7 @@ const App = () =>
 				<Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetPage />} />
 				<Route exact path={routes.ACCOUNT} component={() => <AccountPage />} />
 				<Route exact path={routes.HOME} component={() => <HomePage />} />
+
 				<Route path="*" component={() => <LandingPage />} />
 			</Switch>
 		</div>

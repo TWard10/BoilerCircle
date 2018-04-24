@@ -5,3 +5,16 @@
     top: 60px;
     bottom: 32px;
   }
+
+  .signUpButton {
+      text-align: center;
+      font-size: 1.1vw;
+      border: 0.0em solid white;
+      border-radius: 1em 1em 1em 1em;
+      background-color:  rgb(152, 112, 13);
+      color: white;
+      padding: 0.4em 1em;
+      outline: 0;
+      height: 5vh;
+      width: 15vw;
+  }
