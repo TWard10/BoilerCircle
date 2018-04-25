@@ -88,7 +88,7 @@ class NavigationHeader extends Component {
       docked = {false}
       onRequestChange={(open)=>this.setState({open})}>
       <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
-      <Link to={routes.SIGN_IN}  style={{ textDecoration: 'none' }}><MenuItem>Sign In</MenuItem></Link>
+      <Link to={routes.SIGN_IN}  style={{ textDecoration: 'none' }}><MenuItem>Log In</MenuItem></Link>
       <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
       <Link to={routes.ACCOUNT}  style={{ textDecoration: 'none' }}><MenuItem>Account</MenuItem></Link>
       </Drawer>

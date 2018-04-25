@@ -18,3 +18,13 @@
       height: 5vh;
       width: 15vw;
   }
+
+  .center{
+    top: 15vh;
+    bottom: 15vh;
+    left: 39%;
+    right: 39%;
+    position: absolute;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    padding: 6vh 1vw 0vh 1vw;
+  }

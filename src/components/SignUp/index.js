@@ -142,7 +142,7 @@ class SignUpForm extends Component {
                   />
                   <div className='centerSignUp'>
                   <MuiThemeProvider muiTheme={muiTheme}>
-                   <RaisedButton backgroundColor = "#424242" label="Sign In" style={buttonStyle} onClick={this.onSubmit}/>
+                   <RaisedButton backgroundColor = "#424242" label="Sign Up" style={buttonStyle} onClick={this.onSubmit}/>
                    </MuiThemeProvider>
                    </div>
               </div>
