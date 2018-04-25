@@ -4,6 +4,11 @@ import React, { Component } from 'react'
 import Search from './Search';
 import OptionList from './OptionList';
 import InterestList from './InterestList';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import AuthUserContext from '../../AuthUserContext';
+import withAuthorization from '../../withAuthorization';
+import { auth, fs } from '../../firebase';
 import './interestList.css';
 
 //require('normalize-css');
@@ -1923,6 +1928,12 @@ class InterestPage extends Component {
      list: options
     });
 
+    //console.log(this.state.list);
+
+   }
+
+   submitInterest(){
+     console.log("submit");
    }
 
    removeInterest(inter) {
@@ -1960,7 +1971,10 @@ console.log('render', this.state.list)
   initText={this.state.initText}
   update = {this.update.bind(this)}
   />
-  
+
+  <button onClick={this.submitInterest.bind(this)}>Submit</ button>
+  <br />
+  <br />
   <div >
   <main>
     <OptionList 
@@ -1985,4 +1999,14 @@ console.log('render', this.state.list)
   }
 }
 
-export default InterestPage;
+const mapStateToProps = (state) => ({
+  authUser: state.sessionState.authUser,
+});
+
+
+const authCondition = (authUser) => !!authUser;
+
+export default compose(
+  withAuthorization(authCondition),
+  connect(mapStateToProps)
+)(InterestPage);
