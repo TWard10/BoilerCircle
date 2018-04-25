@@ -5,3 +5,34 @@
     top: 60px;
     bottom: 32px;
   }
+
+  .signUpButton {
+      text-align: center;
+      font-size: 1.1vw;
+      border: 0.0em solid white;
+      border-radius: 1em 1em 1em 1em;
+      background-color:  rgb(152, 112, 13);
+      color: white;
+      padding: 0.4em 1em;
+      outline: 0;
+      height: 5vh;
+      width: 15vw;
+  }
+
+  .center{
+    top: 0vh;
+    bottom: 15vh;
+    left:53vh;
+    position: absolute;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    padding: 6vh 1vw 0vh 1vw;
+  }
+
+.buttons{
+  top: 55vh;
+  bottom: 15vh;
+  left:66vh;
+  position: absolute;
+  border-radius: 0.5em 0.5em 0.5em 0.5em;
+  padding: 6vh 1vw 0vh 1vw;
+}

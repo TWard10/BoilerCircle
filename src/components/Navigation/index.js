@@ -9,6 +9,8 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { auth } from '../../firebase';
+import FlatButton from 'material-ui/FlatButton';
 
 const muiTheme = getMuiTheme({
   "palette": {
@@ -23,8 +25,8 @@ const muiTheme = getMuiTheme({
         "textColor": "#ffeb3b"
     },
     "appBar": {
-        "textColor": "#ffeb3b",
-        "color": "#616161"
+        "textColor": "#ffdc52",
+        "color": "#424242"
     },
     "menuItem": {
         "selectedTextColor": "rgba(0, 0, 0, 0.26)",
@@ -80,16 +82,18 @@ class NavigationHeader extends Component {
     <AppBar
         title="Boiler Circle"
         onLeftIconButtonClick={() =>this.setState({open: !this.state.open})}
+        iconElementRight={<FlatButton label="Sign Out" onClick={auth.doSignOut}/>}
                       />
     <Drawer open={this.state.open}
       docked = {false}
       onRequestChange={(open)=>this.setState({open})}>
-      <Link to={routes.LANDING}><MenuItem>Landing</MenuItem></Link>
-      <Link to={routes.SIGN_IN}><MenuItem>Sign In</MenuItem></Link>
-      <Link to={routes.HOME}><MenuItem>Home</MenuItem></Link>
-      <Link to={routes.ACCOUNT}><MenuItem>Account</MenuItem></Link>
+      <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
+      <Link to={routes.SIGN_IN}  style={{ textDecoration: 'none' }}><MenuItem>Log In</MenuItem></Link>
+      <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
+      <Link to={routes.ACCOUNT}  style={{ textDecoration: 'none' }}><MenuItem>Account</MenuItem></Link>
       </Drawer>
       </MuiThemeProvider>
+
 
 
   NavigationNonAuth = () =>
@@ -101,8 +105,8 @@ class NavigationHeader extends Component {
   <Drawer open={this.state.open}
     docked = {false}
     onRequestChange={(open)=>this.setState({open})}>
-    <Link to={routes.LANDING}><MenuItem>Landing</MenuItem></Link>
-    <Link to={routes.SIGN_IN}><MenuItem>Sign In</MenuItem></Link>
+    <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
+    <Link to={routes.SIGN_IN}  style={{ textDecoration: 'none' }}><MenuItem>Sign In</MenuItem></Link>
   </Drawer>
   </MuiThemeProvider>
 
