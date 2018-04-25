@@ -16,8 +16,17 @@
 }
 
 .header{
-    background: #424242
+    background: #424242;
+    display: flex;
+    align-items: center;
+    justify-content: center }
 
+    div.container6 p {
+    margin: 0 }
+
+.search{
+    position: fixed;
+    top: 0
 }
 
 .pageBackground {

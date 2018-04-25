@@ -1932,9 +1932,7 @@ class InterestPage extends Component {
 
    }
 
-   submitInterest(){
-     console.log("submit");
-   }
+   
 
    removeInterest(inter) {
     const { list } = this.state
@@ -1948,6 +1946,15 @@ class InterestPage extends Component {
     this.setState({
       list: newList
     });
+  }
+
+  submitInt(){
+    console.log('submit');
+    const sublist = []; 
+    this.state.list.map( id =>{
+      sublist.push(inter[id].inter); 
+    })
+    console.log(sublist);
   }
  
 
@@ -1972,15 +1979,14 @@ console.log('render', this.state.list)
   update = {this.update.bind(this)}
   />
 
-  <button onClick={this.submitInterest.bind(this)}>Submit</ button>
-  <br />
-  <br />
+  
   <div >
   <main>
     <OptionList 
     picked = {this.state.list}
     intList = {inter}
     removeint = {this.removeInterest.bind(this)}
+    submitInt = {this.submitInt.bind(this)}
      />
 
   <InterestList 
