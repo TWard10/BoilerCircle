@@ -40,7 +40,7 @@ hr {
     right: 0.75vw;
     margin: 0;
     position: relative;
-    top: 50%; 
+    top: 50%;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     font-size: 1.15vw;
@@ -121,7 +121,7 @@ hr {
     text-align: right;
     vertical-align: middle;
     float: left;
-    
+
 }
 
 .colInput {
@@ -143,7 +143,7 @@ hr {
     font-size: 1vw;
     color: rgb(90, 114, 141);
     float: left;
-    top: 0; 
+    top: 0;
     transform: translateY(10%);
     -webkit-transform: translateY(10%);
 }
@@ -161,10 +161,10 @@ checkbox {
     margin-top: 6.5%;
     margin-left: 7%;
   }
-  
+
   /* Hide default HTML checkbox */
   .switch input {display:none;}
-  
+
   /* The slider */
   .slider {
     position: absolute;
@@ -177,7 +177,7 @@ checkbox {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
@@ -189,26 +189,26 @@ checkbox {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   input:checked + .slider {
     background-color: #2196F3;
   }
-  
+
   input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
   }
-  
+
   input:checked + .slider:before {
     -webkit-transform: translateX(1.5vw);
     -ms-transform: translateX(1.5vw);
     transform: translateX(1.5vw);
   }
-  
+
   /* Rounded sliders */
   .slider.round {
     border-radius: 1vw;
   }
-  
+
   .slider.round:before {
     border-radius: 1vw;
   }
@@ -229,9 +229,9 @@ checkbox {
     padding: 5px 0;
     border-radius: 6px;
     bottom: 100%;
-    left: 50%; 
+    left: 50%;
     margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
- 
+
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
@@ -241,7 +241,7 @@ checkbox {
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
-    visibility: visible;   
+    visibility: visible;
     opacity: 1;
 }
 

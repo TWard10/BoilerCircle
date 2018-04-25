@@ -43,14 +43,14 @@ class AccountPage extends Component {
                   onChange={event => this.setState(byPropKey('photoURL', event.target.value))}
                   type="text"
                   placeholder="Photo"
-        />       
+        />
         <button onClick={this.handleSubmit}>Submit</ button>
         <br />
         <br />
         <PasswordForgetForm />
         <PasswordChangeForm />
 
-        
+
       </div>
     );
   }

@@ -104,8 +104,8 @@ class SignInForm extends Component {
       }
     return (
       <div>
-      <div >
-         <SignUpLink />
+      <div>
+
          </div>
         <div className='loginBackground'>
         <h1 className="loginHeader">LOG IN</h1>
@@ -128,17 +128,22 @@ class SignInForm extends Component {
                 placeholder="Password"
               />
            </ div>
+           <div className = "passLink">
            <PasswordForgetLink />
+           </div>
           <div className="centerLogIn">
            <MuiThemeProvider muiTheme={muiTheme}>
             <RaisedButton backgroundColor = "#424242" label="Log In" style={buttonStyle} onClick={this.onSubmit}/>
             </MuiThemeProvider>
            </div>
 
-            { error && <p>{error.message}</p> }
          </form>
        </div>
-       </div>
+       <div className="move">
+         <SignUpLink />
+         { error && <p>{error.message}</p> }
+         </div>
+      </div>
 
     );
   }
