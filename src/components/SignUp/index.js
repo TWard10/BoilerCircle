@@ -5,6 +5,14 @@ import { auth, fs } from '../../firebase';
 import * as routes from '../../constants';
 
 import './index.css';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
+
 
 const SignUpPage = ({ history }) =>
   <div className="signUpPageBackground">
@@ -69,6 +77,31 @@ class SignUpForm extends Component {
       passwordOne === '' ||
       email === '' ||
       username === '';
+      const muiTheme = getMuiTheme({
+      	"palette": {
+              "primary1Color": "#ffeb3b",
+              "primary2Color": "#ffeb3b",
+              "primary3Color": "#212121",
+              "accent1Color": "#fff9c4",
+              "accent2Color": "#eceff1",
+              "accent3Color": "rgba(255, 255, 255, 0.87)",
+              "borderColor": "#ffeb3b",
+              "canvasColor": "#424242",
+              "textColor": "#ffeb3b"
+          },
+          "appBar": {
+              "textColor": "#ffeb3b",
+              "color": "#616161"
+          },
+          "menuItem": {
+              "selectedTextColor": "rgba(0, 0, 0, 0.26)",
+              "hoverColor": "#616161",
+              "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
+          }
+      });
+      const buttonStyle = {
+        margin: 12,
+      }
 
     return (
       <div className="signUpBackground">
@@ -103,11 +136,11 @@ class SignUpForm extends Component {
                   type="password"
                   placeholder="Confirm Password"
                   />
-              </div>
-              <div className="centerSignUp">
-                  <button className="signUpButton" disabled={isInvalid} type="submit">
-                  Sign Up
-                  </button>
+                  <div className='centerSignUp'>
+                  <MuiThemeProvider muiTheme={muiTheme}>
+                   <RaisedButton backgroundColor = "#424242" label="Sign Up" style={buttonStyle} onClick={this.onSubmit}/>
+                   </MuiThemeProvider>
+                   </div>
               </div>
                 { error && <p>{error.message}</p> }
           </form>

@@ -38,11 +38,11 @@ class LandingPage extends Component {
               "accent3Color": "rgba(255, 255, 255, 0.87)",
               "borderColor": "#ffeb3b",
               "canvasColor": "#424242",
-              "textColor": "#ffeb3b"
+              "textColor": "#ffdc52"
           },
           "appBar": {
-              "textColor": "#ffeb3b",
-              "color": "#616161"
+              "textColor": "#ffdc52",
+              "color": "#424242"
           },
           "menuItem": {
               "selectedTextColor": "rgba(0, 0, 0, 0.26)",
@@ -66,15 +66,17 @@ class LandingPage extends Component {
         <div className="pageBackground">
           <MuiThemeProvider muiTheme={muiTheme}>
 
-                  <div className='container'>
+                  <div className='center'>
                   <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
                     <h1>Boiler Circle</h1>
                     <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
                   </Paper>
                   </div>
+                  <div className = 'buttons'>
                   <div className='container'>
-                    <RaisedButton backgroundColor = "#424242" label="Sign In" onClick={this.handleSign} style={buttonStyle} />
-                    <RaisedButton backgroundColor = "#424242" label="Support" style={buttonStyle} />
+                    <RaisedButton  labelColor = "#ffdc52" backgroundColor = "#424242" label="Sign In" onClick={this.handleSign} style={buttonStyle} />
+                    <RaisedButton labelColor = "#ffdc52" backgroundColor = "#424242" label="Support" style={buttonStyle} />
+                    </div>
                     </div>
           </MuiThemeProvider>
         </div>
