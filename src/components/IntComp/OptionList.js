@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 
+
 const muiTheme = getMuiTheme({
         
       "palette": {
@@ -32,6 +33,7 @@ const muiTheme = getMuiTheme({
             "textColor": "#ffdc52",
             "labelColor": "#424242",
             "margin": "12",
+            "backgroundColor": "ffeb3b"
     },
     "chip": {
                 "backgroundColor": "#ffdc52",
@@ -42,7 +44,9 @@ const muiTheme = getMuiTheme({
     });
 
 export default ({picked, intList, removeint}) => {
+   const hasInts = (picked.length > 0);
    
+
     const styles = {
         chip: {
           margin: 4,
@@ -55,6 +59,10 @@ export default ({picked, intList, removeint}) => {
          //visibility: 'hidden',
           
         },
+        button: {
+        margin: 12,
+        primary1Color: "#424242"
+        }
       };
 
     const idList = picked
@@ -88,13 +96,27 @@ export default ({picked, intList, removeint}) => {
         }
     )
     return(
-        
+        <MuiThemeProvider muiTheme={muiTheme}>
             <div >
+                <h3>
                 <ul>
                 
                     {idList}
                    
                     </ul>
+                    </h3>
+                    <h4>
+
+        {hasInts
+
+        ?  <RaisedButton label="SUBMIT" style={styles.button} backgroundColor = "#424242"/>
+        
+        :  'Click on an Interest to shortlist it...'
+          
+        }
+        
+      </h4>
             </div>
+            </MuiThemeProvider>
     )
 }

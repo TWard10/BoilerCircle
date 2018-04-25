@@ -61,14 +61,15 @@ class Search extends Component{
        return(
 
         <MuiThemeProvider muiTheme={muiTheme}>
-         <header >
+         <header className = 'header'>
             <TextField
             
             label="Search here...."
                
                 type="text"
                 //ref={ (value) => {this.refval = value}}
-                placeholder="Type to filter..." 
+                placeholder="Type to filter interests..." 
+
                 // inputRef={ (value) => this.setState({
                 //     refval: value
                 // })  }
