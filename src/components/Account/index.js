@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-
+import './index.css';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
 import withAuthorization from '../../withAuthorization';
 
 const AccountPage = ({ authUser }) =>
-  <div>
+  <div className='pageBackground'>
     <h1>Account: {authUser.email}</h1>
     <PasswordForgetForm />
     <PasswordChangeForm />
