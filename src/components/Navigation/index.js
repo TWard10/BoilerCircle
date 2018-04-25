@@ -34,40 +34,6 @@ const muiTheme = getMuiTheme({
         "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
     }
 });
-/*const Navigation = ({ authUser }) =>
-  <AuthUserContext.Consumer>
-    {authUser => authUser
-      ? <NavigationAuth />
-      : <NavigationNonAuth />
-    }
-  </AuthUserContext.Consumer>
-
-  const handleLanding = () =>{
-    const {
-        history,
-    } = this.props;
-    history.push(routes.LANDING);
-  }
-  const handleSign = () =>{
-    const {
-        history,
-    } = this.props;
-    history.push(routes.SIGN_IN);
-  }
-  const handleHome = () =>{
-    const {
-        history,
-    } = this.props;
-    history.push(routes.HOME);
-  }
-  const handleAccount = () =>{
-    const {
-        history,
-    } = this.props;
-    history.push(routes.ACCOUNT);
-  }*/
-
-
 
 class NavigationHeader extends Component {
   constructor(props, context){
