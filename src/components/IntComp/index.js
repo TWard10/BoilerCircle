@@ -4,6 +4,11 @@ import React, { Component } from 'react'
 import Search from './Search';
 import OptionList from './OptionList';
 import InterestList from './InterestList';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import AuthUserContext from '../../AuthUserContext';
+import withAuthorization from '../../withAuthorization';
+import { auth, fs } from '../../firebase';
 import './interestList.css';
 
 //require('normalize-css');
@@ -1923,7 +1928,11 @@ class InterestPage extends Component {
      list: options
     });
 
+    //console.log(this.state.list);
+
    }
+
+   
 
    removeInterest(inter) {
     const { list } = this.state
@@ -1937,6 +1946,15 @@ class InterestPage extends Component {
     this.setState({
       list: newList
     });
+  }
+
+  submitInt(){
+    console.log('submit');
+    const sublist = []; 
+    this.state.list.map( id =>{
+      sublist.push(inter[id].inter); 
+    })
+    console.log(sublist);
   }
  
 
@@ -1960,6 +1978,7 @@ console.log('render', this.state.list)
   initText={this.state.initText}
   update = {this.update.bind(this)}
   />
+
   
   <div >
   <main>
@@ -1967,6 +1986,7 @@ console.log('render', this.state.list)
     picked = {this.state.list}
     intList = {inter}
     removeint = {this.removeInterest.bind(this)}
+    submitInt = {this.submitInt.bind(this)}
      />
 
   <InterestList 
@@ -1985,4 +2005,14 @@ console.log('render', this.state.list)
   }
 }
 
-export default InterestPage;
+const mapStateToProps = (state) => ({
+  authUser: state.sessionState.authUser,
+});
+
+
+const authCondition = (authUser) => !!authUser;
+
+export default compose(
+  withAuthorization(authCondition),
+  connect(mapStateToProps)
+)(InterestPage);

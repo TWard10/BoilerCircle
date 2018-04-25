@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-
+import 'firebase/firestore';
 var config = {
     apiKey: "AIzaSyAwWoby7yaH7o8MKsunzjeXFy6ly-OdW-Q",
     authDomain: "boilercircle-ecbd4.firebaseapp.com",
@@ -8,11 +8,16 @@ var config = {
     storageBucket: "boilercircle-ecbd4.appspot.com",
     messagingSenderId: "798938919270"
   };
-var fire = firebase.initializeApp(config);
-const db = fire.database();
-const auth = firebase.auth();
+
+firebase.initializeApp(config);
+  
+  const db = firebase.database();
+  const auth = firebase.auth();
+  const fs = firebase.firestore();
+
 export {
+    auth,
     db,
-    auth
+    fs
 };
 

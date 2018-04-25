@@ -43,7 +43,7 @@ const muiTheme = getMuiTheme({
 
     });
 
-export default ({picked, intList, removeint}) => {
+export default ({picked, intList, removeint, submitInt}) => {
    const hasInts = (picked.length > 0);
    
 
@@ -109,7 +109,12 @@ export default ({picked, intList, removeint}) => {
 
         {hasInts
 
-        ?  <RaisedButton label="SUBMIT" style={styles.button} backgroundColor = "#424242"/>
+        ?  <RaisedButton 
+        label="SUBMIT" 
+        style={styles.button} 
+        backgroundColor = "#424242"
+        onClick = {() => submitInt()}
+        />
         
         :  'Click on an Interest to shortlist it...'
           

@@ -67,8 +67,8 @@ class SignInForm extends Component {
       error,
     } = this.state;
     const style = {
-      height: 400,
-      width: 400,
+      height: 500,
+      width: 350,
       margin: 50,
       padding: 60,
       textAlign: 'center',
@@ -104,42 +104,42 @@ class SignInForm extends Component {
       }
     return (
       <div>
-      <MuiThemeProvider muiTheme={muiTheme}>
-      <Paper style={style} zDepth={3} circle={true}>
-      <h1 className="loginHeader">LOG IN</h1>
-      <form onSubmit={this.onSubmit}>
-       <div className="emailBar">
-          <input
-            value={email}
-            className="textBox"
-            onChange={event => this.setState(byPropKey('email', event.target.value))}
-            type="text"
-            placeholder="Email Address"
-          />
-       </ div>
-       <div className="emailBar">
-          <input
-            className="textBox"
-            value={password}
-            onChange={event => this.setState(byPropKey('password', event.target.value))}
-            type="password"
-            placeholder="Password"
-          />
-       </ div>
-       <PasswordForgetLink />
-       <div className="centerLogIn">
+      <div >
+         <SignUpLink />
+         </div>
+        <div className='loginBackground'>
+        <h1 className="loginHeader">LOG IN</h1>
+          <form onSubmit={this.onSubmit}>
+           <div className="emailBar">
+              <input
+                value={email}
+                className="textBox"
+                onChange={event => this.setState(byPropKey('email', event.target.value))}
+                type="text"
+                placeholder="Email Address"
+              />
+           </ div>
+           <div className="emailBar">
+              <input
+                className="textBox"
+                value={password}
+                onChange={event => this.setState(byPropKey('password', event.target.value))}
+                type="password"
+                placeholder="Password"
+              />
+           </ div>
+           <PasswordForgetLink />
+          <div className="centerLogIn">
+           <MuiThemeProvider muiTheme={muiTheme}>
+            <RaisedButton backgroundColor = "#424242" label="Log In" style={buttonStyle} onClick={this.onSubmit}/>
+            </MuiThemeProvider>
+           </div>
+
+            { error && <p>{error.message}</p> }
+         </form>
+       </div>
        </div>
 
-        { error && <p>{error.message}</p> }
-    </form>
-        </Paper>
-        <RaisedButton backgroundColor = "#424242" label="Sign In" style={buttonStyle} />
-      </MuiThemeProvider>
-      <button className="signInButton" disabled={isInvalid} type="submit">
-        Sign In
-      </button>
-       <SignUpLink />
-       </div>
     );
   }
 }
