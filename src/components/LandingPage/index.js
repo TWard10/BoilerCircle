@@ -72,9 +72,11 @@ class LandingPage extends Component {
                     <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
                   </Paper>
                   </div>
+                  <div className = 'buttons'>
                   <div className='container'>
                     <RaisedButton  labelColor = "#ffdc52" backgroundColor = "#424242" label="Sign In" onClick={this.handleSign} style={buttonStyle} />
                     <RaisedButton labelColor = "#ffdc52" backgroundColor = "#424242" label="Support" style={buttonStyle} />
+                    </div>
                     </div>
           </MuiThemeProvider>
         </div>

@@ -20,11 +20,19 @@
   }
 
   .center{
-    top: 15vh;
+    top: 0vh;
     bottom: 15vh;
-    left: 39%;
-    right: 39%;
+    left:53vh;
     position: absolute;
     border-radius: 0.5em 0.5em 0.5em 0.5em;
     padding: 6vh 1vw 0vh 1vw;
   }
+
+.buttons{
+  top: 55vh;
+  bottom: 15vh;
+  left:66vh;
+  position: absolute;
+  border-radius: 0.5em 0.5em 0.5em 0.5em;
+  padding: 6vh 1vw 0vh 1vw;
+}

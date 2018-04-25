@@ -104,6 +104,9 @@ class SignInForm extends Component {
       }
     return (
       <div>
+      <div >
+         <SignUpLink />
+         </div>
         <div className='loginBackground'>
         <h1 className="loginHeader">LOG IN</h1>
           <form onSubmit={this.onSubmit}>
@@ -134,9 +137,9 @@ class SignInForm extends Component {
 
             { error && <p>{error.message}</p> }
          </form>
-       <SignUpLink />
        </div>
        </div>
+
     );
   }
 }
