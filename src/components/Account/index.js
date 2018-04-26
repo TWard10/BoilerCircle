@@ -5,11 +5,12 @@ import AuthUserContext from '../../AuthUserContext';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
 import { RaisedButton, Avatar, Paper, FloatingActionButton, List, MenuItem, TextField } from 'material-ui';
-import PasswordChangeForm from '../PasswordChange';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-//import Button from 'material-ui/Button';
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 //import man from '../../images/man.png'
+//import FileUploader from 'react-firebase-file-uploader';
+import PasswordChangeForm from '../PasswordChange'
+
 
 
 
@@ -24,7 +25,7 @@ const muiTheme = getMuiTheme({
           "accent3Color": "rgba(255, 255, 255, 0.87)",
           "borderColor": "#ffeb3b",
           "canvasColor": "#424242",
-          "textColor": "#ffeb3b"
+          "textColor": "#ffdc52"
       },
       "appBar": {
           "textColor": "#ffdc52",
@@ -55,10 +56,18 @@ const styles = {
     height: 300,
     width: 500,
     textAlign: 'center',
+
+    // display: 'inline-block',
+    // position: "absolute",
+    // top: "65%",
+    // left: "35%",
+
     display: 'inline-block',
-    position: "absolute",
-    top: "65%",
-    left: "35%",
+    position: "fixed",
+      top: "80%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      overflow:'hidden'
 
 
 
@@ -69,11 +78,22 @@ const styles = {
     width: 512,
     //marginLeft: 60,
     //paading:60,
+
+
     textAlign: "center",
-    position: "absolute",
-    top: "7%",
-    left: "35%",
-    overflow:'hidden'
+
+    // position: "absolute",
+    // top: "7%",
+    // left: "35%",
+    // overflow:'hidden'
+
+
+    display: 'inline-block',
+    position: "fixed",
+      top: "35%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      overflow:'hidden'
 
     //display: 'inline-block',
 
@@ -206,9 +226,16 @@ class AccountPage extends Component {
       this.setState({
         displayName: this.state.newDisplayName
       })
+      fs.updateUsername(this.props.authUser.uid, this.state.newDisplayName);
+    }
+
+    if(this.state.imagePreviewUrl){
+      fs.updatePhoto(this.props.authUser.uid, this.state.imagePreviewUrl);
     }
 
   }
+
+
  _handleSubmit(e) {
     e.preventDefault();
     // TODO: do something with -> this.state.file
@@ -256,8 +283,10 @@ fileChangedHandler = (event) => {
     let $imagePreview = null;
     if (imagePreviewUrl) {
       $imagePreview = (<img src={imagePreviewUrl} />);
+      console.log("ig url", imagePreviewUrl)
     } else {
       $imagePreview = (<div className="previewText"></div>);
+      console.log("else url")
     }
 
     return(
@@ -378,7 +407,7 @@ fileChangedHandler = (event) => {
 
       <Paper style={styles.paper} zDepth={5}>
 
-      <h4> Display Name: <RaisedButton label = {displayName} backgroundColor = "#424242" primary1Color = "#424242" /> </h4>
+      <h4> Display Name: {displayName}  </h4>
       <h4> Email Address: {email}</h4>
 
       <footer>

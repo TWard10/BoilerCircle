@@ -52,12 +52,17 @@ class LandingPage extends Component {
       });
 
       const style = {
-        height: 400,
-        width: 400,
-        margin: 50,
-        padding: 60,
-        textAlign: 'center',
-        display: 'inline-block'
+        height: 550,
+        width: 550,
+        // margin: 50,
+        // padding: 60,
+         textAlign: 'justify',
+        display: 'inline-block',
+        position: "fixed",
+          top: "35%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          overflow:'hidden'
       };
       const buttonStyle = {
         margin: 12,
@@ -67,9 +72,11 @@ class LandingPage extends Component {
           <MuiThemeProvider muiTheme={muiTheme}>
 
                   <div className='center'>
-                  <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true} className='styles-overriding-css-example'>
-                    <h1>Boiler Circle</h1>
-                    <b>Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
+                  <Paper backgroundColor = "#424242" style={style} zDepth={3} circle={true}>
+                    <h1 className = 'h1'>Boiler Circle</h1>
+                    <br/>
+                    <br/>
+                    <b className = 'h2' >Welcome to Boiler Circle. Our goal is to get you connected to fellow boilers who share common interests.  Select your hobbies and get connected!</b>
                   </Paper>
                   </div>
                   <div className = 'buttons'>
