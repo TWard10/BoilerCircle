@@ -1954,7 +1954,7 @@ class InterestPage extends Component {
     this.state.list.map( id =>{
       sublist.push(inter[id].inter); 
     })
-    console.log(sublist);
+    fs.updateUserInterests(this.props.authUser.uid, sublist);
   }
  
 

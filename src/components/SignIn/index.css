@@ -81,6 +81,20 @@
 }
 
 .centerLogIn {
-  text-align: center;
-  margin: auto;
+  position: absolute;
+  top: 50vh;
+  left: 10vh;
+
+}
+
+.move{
+  top:75vh;
+  left: 70vh;
+  right: 70vh;
+  position: absolute;
+}
+
+.passLink{
+  position: absolute;
+  left: 11vh;
 }

@@ -170,11 +170,7 @@ class AccountPage extends Component {
 
     });
     console.log(this.state.name, " valll")
-   if (this.state.newDisplayName){
-     this.setState({
-       displayName: this.state.newDisplayName
-     })
-   }
+   
 
   }
     
@@ -206,6 +202,12 @@ class AccountPage extends Component {
       pass: false
 
     });
+    if (this.state.newDisplayName){
+      this.setState({
+        displayName: this.state.newDisplayName
+      })
+    }
+
   }
  _handleSubmit(e) {
     e.preventDefault();
