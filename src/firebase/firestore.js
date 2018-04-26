@@ -10,9 +10,13 @@ export const addUser = (id, username, email) =>
       uid: id
   })
 
-export const updateUserInfo = (id, username, photo) =>
+export const updateUsername = (id, username) =>
   fs.collection('users').doc(id).update({
-    displayName: username,
+    displayName: username
+  })
+
+export const updatePhoto = (id, photo) =>
+  fs.collection('users').doc(id).update({
     photoURL: photo
   })
 
