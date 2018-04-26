@@ -6,6 +6,7 @@ import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
 import { RaisedButton, Avatar, Paper, FloatingActionButton, List, MenuItem, TextField } from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import PasswordChangeForm from '../PasswordChange';
 //import Button from 'material-ui/Button';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 //import man from '../../images/man.png'
