@@ -9,6 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 //import man from '../../images/man.png'
 //import FileUploader from 'react-firebase-file-uploader';
+import PasswordChangeForm from '../PasswordChange'
 
 
 
