@@ -21,8 +21,36 @@ class AccountPage extends Component {
       }
   }
 
+  revertToOld = (displayName) => {
+    if(displayName === ''){
+      fs.getUser(this.props.authUser.uid).then(doc => {
+        if(doc.exists){
+          this.setState({
+            displayName: doc.data().displayName
+          })
+        }
+    })
+  }
+}
+  componentDidMount(){
+    fs.getUser(this.props.authUser.uid).then(doc => {
+      if(doc.exists){
+        this.setState({
+          displayName: doc.data().displayName
+        })
+      }
+      else{
+        this.setState({
+          displayName: 'DisplayName'
+        })
+      }
+    })
+  }
+
+
   handleSubmit(){
     console.log(this.props.authUser.uid);
+    this.revertToOld(this.state.displayName)
     fs.updateUserInfo(this.props.authUser.uid, this.state.displayName, this.state.photoURL)
   }
 
@@ -31,12 +59,13 @@ class AccountPage extends Component {
       email,
       displayName
     } = this.state;
+
     return(
       <div>
         <input
                   onChange={event => this.setState(byPropKey('displayName', event.target.value))}
                   type="text"
-                  placeholder="Display Name"
+                  placeholder={displayName}
         />
 
         <input

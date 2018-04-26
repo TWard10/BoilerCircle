@@ -25,7 +25,7 @@ const muiTheme = getMuiTheme({
         "textColor": "#ffeb3b"
     },
     "appBar": {
-        "textColor": "#ffdc52",
+        "textColor": "#ffeb3b",
         "color": "#424242"
     },
     "menuItem": {
