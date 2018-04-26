@@ -2,10 +2,10 @@ import  React,{ Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import AuthUserContext from '../../AuthUserContext';
-import { PasswordForgetForm } from '../PasswordForget';
-import PasswordChangeForm from '../PasswordChange';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
+import { PasswordForgetForm } from '../PasswordForget';
+import PasswordChangeForm from '../PasswordChange';
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -43,14 +43,14 @@ class AccountPage extends Component {
                   onChange={event => this.setState(byPropKey('photoURL', event.target.value))}
                   type="text"
                   placeholder="Photo"
-        />
+        />       
         <button onClick={this.handleSubmit}>Submit</ button>
         <br />
         <br />
         <PasswordForgetForm />
         <PasswordChangeForm />
 
-
+        
       </div>
     );
   }

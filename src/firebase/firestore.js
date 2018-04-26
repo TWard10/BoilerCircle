@@ -20,7 +20,7 @@ export const updateUserInterests = (id, newInterests) =>
   fs.collection('users').doc(id).update({
     interests: newInterests
   })
-  
+ 
 export const addPost = (id, displayName, title, description, tags) =>
   fs.collection('posts').doc().set({
     title: title,
@@ -40,9 +40,6 @@ export const addFriend = (id, friends) =>
   fs.collection('users').doc(id).update({
     friends: friends
   })
-
-export const getFriends = (id) =>
-  fs.collection('users').doc(id).get()
 
 export const getPosts = (id, tag) =>
   fs.collection('posts').where(tag).orderBy(Date).get()

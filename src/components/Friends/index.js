@@ -26,16 +26,24 @@ class FriendsPage extends Component {
     }
 
     addFriend(){
-        fs.getFriends(this.props.authUser.uid).then(doc => {
-            this.setState({
-                curFriends: doc.data().friends
-            })
+        var hasFriend = false;
+        var holdName = this.state.name;
+        var holdAr = this.state.curFriends;
+        holdAr.forEach(function (friend) {
+            console.log(friend + " ::: " + holdName)
+            if(friend === holdName){
+                hasFriend = true;
+            }
         });
-    
-        var joined = this.state.curFriends.concat(this.state.name);
-        this.setState({ curFriends: joined })
-        fs.addFriend(this.props.authUser.uid, joined);
-    
+
+        if(hasFriend == true){
+            alert("You are already following this user");
+        }else{
+            var joined = this.state.curFriends.concat(this.state.name);
+            this.setState({ curFriends: joined })
+            fs.addFriend(this.props.authUser.uid, joined);
+            alert("You are now following: " + this.state.name);
+        }
     }
 
     doSearch(){
@@ -43,13 +51,14 @@ class FriendsPage extends Component {
         fs.getPeople(this.state.name).then((querySnapshot) => {
             if (!querySnapshot.empty) {
                  this.setState({
-                     messages: []
+                     people: []
                  })
      
                  querySnapshot.forEach(data => {
-                 var peeps = <button onClick={this.addFriend}>{this.state.people.concat(data.data().displayName)}</button>;
+                 var peeps = <button onClick={this.addFriend}>{data.data().displayName}</button>;
+                 var joined = this.state.people.concat(peeps);
                  this.setState({
-                     people: peeps
+                     people: joined
                  })  
               });
             } 
@@ -57,6 +66,11 @@ class FriendsPage extends Component {
     }
 
     render() {
+       fs.getUser(this.props.authUser.uid).then(doc => {
+            this.setState({
+                curFriends: doc.data().friends
+            })
+        });
       const { people } = this.state
       return(
         <div>
@@ -67,7 +81,9 @@ class FriendsPage extends Component {
             />
 
             <button onClick={this.doSearch}>Search</ button>
-
+            <br/>
+            <br/>
+            <br/>
             <div>
              {people}
             </div>
