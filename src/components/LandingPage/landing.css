@@ -36,3 +36,30 @@
   border-radius: 0.5em 0.5em 0.5em 0.5em;
   padding: 6vh 1vw 0vh 1vw;
 }
+
+.container{
+  display: 'inline-block';
+    position: fixed;
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    
+}
+
+.h1{
+  position: fixed;
+      top: 30%;
+      left: 50%;
+     font-size: 45px;
+      transform: translate(-50%, -50%);
+}
+
+.h2{
+  position: fixed;
+      top: 55%;
+      text-align: center;
+      left: 50%;
+      transform: translate(-50%, -50%);
+}
+
+
