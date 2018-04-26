@@ -27,10 +27,25 @@ export const addPost = (id, displayName, title, description, tags) =>
     displayName: displayName,
     description: description,
     tags: tags,
+    Date: Date.now(),
     uid: id
   }).then(function() {
     console.log("Document successfully written!");
 })
+
+export const getPeople = (name) =>
+  fs.collection('users').where('displayName', '==', name).get()
+
+export const addFriend = (id, friends) =>
+  fs.collection('users').doc(id).update({
+    friends: friends
+  })
+
+export const getFriends = (id) =>
+  fs.collection('users').doc(id).get()
+
+export const getPosts = (id, tag) =>
+  fs.collection('posts').where(tag).orderBy(Date).get()
 
 export const getUser = (id) =>
   fs.collection('users').doc(id).get()
