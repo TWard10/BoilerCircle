@@ -1,0 +1,172 @@
+.createPost {
+    background-color: rgb(238, 237, 237);
+    height: 30%;
+    width: 50vw;
+    border-left: white solid 1px;
+    border-bottom: rgb(238, 237, 237) 1px;
+    float: left;
+}
+
+div.ReactTags__tags {
+    position: relative;
+    margin-left: 2%;
+    margin-top: 0.3%;
+    margin-bottom: 1%;
+}
+
+/* Styles for the input */
+div.ReactTags__tagInput {
+    width: 200px;
+    border-radius: 2px;
+    display: inline-block;
+}
+div.ReactTags__tagInput input.ReactTags__tagInputField,
+div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+    height: 31px;
+    margin: 0;
+    font-size: 12px;
+    width: 100%;
+    border: 1px solid #eee;
+}
+
+/* Styles for selected tags */
+div.ReactTags__selected span.ReactTags__tag {
+    border: 1px solid #ddd;
+    background: #eee;
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 5px;
+    cursor: move;
+    border-radius: 2px;
+}
+div.ReactTags__selected a.ReactTags__remove {
+    color: #aaa;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* Styles for suggestions */
+div.ReactTags__suggestions {
+    position: absolute;
+}
+div.ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+    background: white;
+    width: 200px;
+}
+div.ReactTags__suggestions li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0;
+}
+div.ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+}
+div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+    background: #b7cfe0;
+    cursor: pointer;
+}
+
+.signInButton {
+    text-align: center;
+    font-size: 1.1vw;
+    border: 0.0em solid white;
+    border-radius: 0.75em;
+    background-color:  rgb(152, 112, 13);
+    color: white;
+    padding: 0.4em 1em;
+    outline: 0;
+    height: 5vh;
+    width: 15vw;
+    margin-bottom: 6em;
+  }
+  
+  .pageBackground {
+    background-color: rgb(244,227,183);
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    bottom: 32px;
+  }
+  
+  ::placeholder {
+    color: #ffeb3b;
+  }
+  
+  .loginBackground {
+    top: 15vh;
+    bottom: 15vh;
+    left: 39%;
+    right: 39%;
+    background: #424242;
+    color: #424242;
+    position: absolute;
+    box-sizing: border-box;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    padding: 6vh 1vw 0vh 1vw;
+  }
+  
+  .emailBar p {
+    text-align: center;
+    padding-bottom: 8px;
+    margin: auto;
+    height: 50px;
+    font-size: 20px;
+    border: 0.2em;
+    border-color: #ffeb3b;
+    resize: vertical;
+    overflow: auto;
+    font-size: 16px;
+  }
+  
+  .emailBar input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    outline: none;
+    color: #ffeb3b;
+  }
+  
+  .emailBar a {
+    text-decoration: none;
+    font-size: 14px;
+    color:#ffeb3b;
+  }
+  
+  .textBox {
+    font-size: 1.25vw;
+    height: 6vh;
+    width: 88%;
+    color: #ffeb3b;
+  }
+  
+  .loginHeader {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 2.8vw;
+    color: #ffeb3b;
+  }
+  
+  .centerLogIn {
+    position: absolute;
+    top: 50vh;
+    left: 10vh;
+  
+  }
+  
+  .move{
+    top:75vh;
+    left: 70vh;
+    right: 70vh;
+    position: absolute;
+  }
+  
+  .passLink{
+    position: absolute;
+    left: 11vh;
+  }
