@@ -7,6 +7,7 @@ export const ACCOUNT = '/account';
 export const PASSWORD_FORGET = '/pw-forget';
 export const HOME = '/home';
 export const INTER = '/options';
+export const FRIENDS = '/friends';
 export default {
     SIGN_IN,
     SIGN_UP,
@@ -15,5 +16,6 @@ export default {
     HOME,
     INTER,
     ACCOUNT,
-    PASSWORD_FORGET
+    PASSWORD_FORGET,
+    FRIENDS
 }

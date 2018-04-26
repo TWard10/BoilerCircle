@@ -2,8 +2,6 @@ import  React,{ Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import AuthUserContext from '../../AuthUserContext';
-import { PasswordForgetForm } from '../PasswordForget';
-import PasswordChangeForm from '../PasswordChange';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
 import { RaisedButton, Avatar, Paper, FloatingActionButton, List, MenuItem, TextField } from 'material-ui'
@@ -111,6 +109,7 @@ const styles = {
     overflow:'hidden'
   },
 };
+
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -305,7 +304,6 @@ fileChangedHandler = (event) => {
       : console.log('else')
 
       }
-
 
 
 
