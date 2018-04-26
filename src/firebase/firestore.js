@@ -16,11 +16,13 @@ export const updateUserInfo = (id, username, photo) =>
     photoURL: photo
   })
 
+
 export const updateUserInterests = (id, newInterests) =>
   fs.collection('users').doc(id).update({
     interests: newInterests
   })
  
+
 export const addPost = (id, displayName, title, description, tags) =>
   fs.collection('posts').doc().set({
     title: title,

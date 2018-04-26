@@ -1,0 +1,76 @@
+ <div>
+        <MuiThemeProvider muiTheme = {muiTheme}>
+       
+        <div>
+        <Paper style={styles.cpaper} zDepth={5} circle={true} />
+        
+        
+        <Paper style={styles.paper} zDepth={5} >
+
+        <div>
+          
+
+          <h4>
+
+            
+             Display Name: {displayName}
+
+            </h4>
+          
+        </div>
+        
+        </Paper>
+        
+        </div>
+        <div>
+         <input
+                  onChange={event => this.setState(byPropKey('displayName', event.target.value))}
+                  type="text"
+                  placeholder={displayName}
+        />
+        
+        
+         <div className="previewComponent">
+        <form 
+        onSubmit={(e)=>this._handleSubmit(e)}>
+          <input className="fileInput" 
+            type="file" 
+            onChange={(e)=>this._handleImageChange(e)} />
+          <button className="submitButton" 
+            type="submit" 
+            onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+        </form>
+        <div className="imgPreview">
+          {$imagePreview}
+        </div>
+      </div>
+      </div>
+
+       
+
+ 
+
+<RaisedButton label = "choose photo"
+
+        
+                  onChange={this.fileChangedHandler}
+                  type="file"
+                  id="photo"
+                  style = {styles.uploadInput}
+                 
+                  //placeholder="Photo"
+             />
+       
+        
+        <button onClick={this.uploadHandler}>Upload</ button>
+        <br />
+        <br />
+        <PasswordForgetForm />
+        <PasswordChangeForm />
+
+         </MuiThemeProvider>
+      </div>
+     
+    );
+  }
+}

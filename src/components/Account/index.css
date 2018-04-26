@@ -255,3 +255,68 @@ checkbox {
     border-style: solid;
     border-color: rgb(90, 114, 141) transparent transparent transparent;
 }
+.pageBackground {
+        background-color: rgb(244,227,183);
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        bottom: 32px;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-align-content: center;
+        align-content: center
+      }
+    .astext {
+        background:none;
+        border:none;
+        margin:0;
+        padding:0;
+    }
+
+    .photo{
+        border-radius: 50%;
+        height: 200px;
+        width: 200px
+    }
+    .trans{
+        backgroundColor:'transparent';
+        height: 512;
+        width: 512; 
+        border-radius: 50%
+    }
+
+    .textBox {
+          font-size: 1.25vw;
+          height: 6vh;
+          width: 88%;
+          background: 'transparent';
+        }
+
+        .emailBar p {
+            text-align: center;
+            padding-bottom: 8px;
+            margin: auto;
+            height: 50px;
+            font-size: 20px;
+            border: 0.2em;
+            border-color: #ffeb3b;
+            resize: vertical;
+            overflow: auto;
+            font-size: 16px;
+          }
+          
+          .emailBar input[type="text"], input[type="password"] {
+            border: none;
+            border-bottom: 1px solid white;
+            background: transparent;
+            outline: none;
+            color: #ffeb3b;
+          }
+          
+          .emailBar a {
+            text-decoration: none;
+            font-size: 14px;
+            color:#ffeb3b;
+          }
