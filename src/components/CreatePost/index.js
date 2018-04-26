@@ -5,8 +5,110 @@ import AuthUserContext from '../../AuthUserContext';
 import { WithContext as ReactTags } from 'react-tag-input';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
-
+import { Paper, TextField, RaisedButton } from 'material-ui'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import './index.css';
+
+
+
+const muiTheme = getMuiTheme({
+      "palette": {
+            "primary1Color": "#ffeb3b",
+            "primary2Color": "#ffeb3b",
+            "primary3Color": "#212121",
+            "accent1Color": "#fff9c4",
+            "accent2Color": "#eceff1",
+            "accent3Color": "rgba(255, 255, 255, 0.87)",
+            "borderColor": "#ffeb3b",
+            "canvasColor": "#424242",
+            "textColor": "#ffeb3b"
+        },
+        "appBar": {
+            "textColor": "#ffdc52",
+            "color": "#424242"
+        },
+        "menuItem": {
+            "selectedTextColor": "rgba(0, 0, 0, 0.26)",
+            "hoverColor": "#616161",
+            "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
+        }
+    });
+
+
+
+
+    const styles = {
+        uploadButton: {
+          verticalAlign: 'middle',
+        },
+        uploadInput: {
+          cursor: 'pointer',
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          width: '100%',
+          opacity: 0,
+        },
+        paper: {
+          height: 650,
+          width: 500,
+          textAlign: 'center',
+          position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            overflow:'hidden'
+        },
+        cpaper: {
+          height: 512,
+          width: 512,
+          //marginLeft: 60,
+          //paading:60,
+          textAlign: "center",
+          position: "absolute",
+          top: "7%",
+          left: "35%",
+          overflow:'hidden'
+      
+        },
+        changepaper: {
+          height: 130,
+          width: 500,
+          textAlign: 'center',
+          display: 'inline-block',
+          position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            overflow:'hidden'
+        },
+      
+        ImageInput: {
+          cursor: 'pointer',
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          width: '100%',
+          opacity: 0,
+        },
+        changepasspaper: {
+          height: 500,
+          width: 500,
+          textAlign: 'center',
+          display: 'inline-block',
+          position: "absolute",
+          top: "45%",
+          left: "70%",
+          overflow:'hidden'
+        },
+      };
+
+
 
 
 const byPropKey = (propertyName, value) => () => ({
@@ -60,38 +162,68 @@ class PostPage extends Component {
     }
   
     mySubmit(){
+        if(!this.state.title || !this.state.description || this.state.tags.length < 1){
+        alert("You must fill in all fields!")
+        }else{
         fs.addPost(this.props.authUser.uid, this.state.displayName, this.state.title, this.state.description, this.state.tags);
+
+        }
     }
 
   
     render() {
       const { tags } = this.state;
       return(
-        <div>
-            <label><strong>Title</strong></label>
-            <input
-                    onChange={event => this.setState(byPropKey('title', event.target.value))}
-                    type="text"
-                    placeholder="Title"
-            />
+          <MuiThemeProvider muiTheme={muiTheme}>
+          <div>
+          <Paper style={styles.paper} zDepth={5} >
+          
+         
+            <div>
+           
+          <TextField className = "textbox"
+               type="text"
+               placeholder="Enter a title for you post..."
+               onChange={event => this.setState(byPropKey('title', event.target.value))}
+               />
+               </div>
 
-            <label><strong>Description</strong></label>
-            <input
-                    onChange={event => this.setState(byPropKey('description', event.target.value))}
-                    type="text"
-                    placeholder="Tell us about your interests"
-            />
+          <br/>
+          <br/>
+          <br/>
+          <TextField className = "textbox"
+               type="text"
+               placeholder="Tell us something about your interest(s)"
+               onChange={event => this.setState(byPropKey('description', event.target.value))}
+               />
 
-            <label><strong>Tags</strong></label>
-                        <ReactTags
+          <br/>
+          <br/>
+          <br/>
+                 <label><strong>Tags</strong></label>
+         <br/>
+          <br/>
+         
+
+               <ReactTags
                             tags={this.state.tags}
                             handleDelete={this.handleDelete}
                             handleAddition={this.handleAddition}
                             handleDrag={this.handleDrag} 
                         />
 
-            <button onClick={this.mySubmit}>Submit</button>
-        </div>
+                        <footer>
+                        <RaisedButton 
+        label="POST" 
+        style={styles.button} 
+        backgroundColor = "#424242"
+        onClick = {this.mySubmit}
+        />
+                            </footer>
+
+            </Paper>
+              </div>
+        </MuiThemeProvider>
       );
     }
   }
