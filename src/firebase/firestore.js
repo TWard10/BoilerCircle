@@ -20,4 +20,7 @@ export const addUser = (id, username, email) =>
       fs.collection('users').doc(id).update({
         interests: newInterests
       })
+
+      export const getUser = (id) => 
+      fs.collection('users').doc(id).get()
   
