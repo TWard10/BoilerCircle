@@ -37,6 +37,7 @@ class AccountPage extends Component {
       if(doc.exists){
         this.setState({
           displayName: doc.data().displayName
+
         })
       }
       else{
@@ -45,6 +46,7 @@ class AccountPage extends Component {
         })
       }
     })
+
   }
 
 
