@@ -96,9 +96,15 @@ class HomePage extends Component {
       posts: [], 
       following: []
     };
+    this.makepost = this.makepost.bind(this);
   }
 
   componentDidMount() {
+    this.makepost('cocker', 'mark', 'rick james', 'hey everyone i am a dirty whore')
+    this.makepost('cocker2', 'james', 'rick morty', 'hey everyone i am NOT a dirty whore')
+    this.makepost('cocker3', 'james', 'rick morty', 'hey everyone i am NOT a dirty whore')
+
+
     const { onSetUsers } = this.props;
     fs.getUser(this.props.authUser.uid).then(doc => {
           if(doc.exists){
@@ -165,7 +171,7 @@ class HomePage extends Component {
 
    
 
-    var temp = 
+    const arr = this.state.posts.push(
         <div>
          <ListItem
     
@@ -185,18 +191,20 @@ class HomePage extends Component {
               }
               secondaryTextLines={2}
             />
-            <Divider inset={true} />;
-    </div>;
+            <Divider inset={true} />
+    </div>
+    )
 
-  const arr = this.state.post.concat(temp);
-
+  console.log('arr', arr)
   this.setState({
-    post: arr
+    posts: arr
   });
     
   }
 
   render() {
+
+    console.log('posts', this.state.posts)
 
       const { users} = this.state;
       let {avatarURL} = this.state;
@@ -212,11 +220,17 @@ class HomePage extends Component {
         avURL = (<img className='resize' src = {this.state.avatarURL} />)
       }
         console.log(this.state.interest)
+      const allPosts = Object.keys(this.state.posts).map((item) => {
+        return 
+      })
       const interestList = this.state.interest.map((inter)=>{
           return <RaisedButton label={inter} disabled={true} fullWidth={true} disabledBackgroundColor={"#ffdc52"} disabledLabelColor={"#424242"} label={inter} labelColor={"#424242"}/>
       })
+
+      
       console.log(interestList)
     return (
+
       <MuiThemeProvider muiTheme = {muiTheme}>
       <div className='pageBackground'>
         <div className='row'>
@@ -248,7 +262,7 @@ class HomePage extends Component {
             
                <div className="scroll">
                <List>
-              
+              {allPosts}
               </List>
 
                  </div>
