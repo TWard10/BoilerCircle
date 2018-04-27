@@ -11,30 +11,28 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import './index.css';
 
 
-
 const muiTheme = getMuiTheme({
-      "palette": {
-            "primary1Color": "#ffeb3b",
-            "primary2Color": "#ffeb3b",
-            "primary3Color": "#212121",
-            "accent1Color": "#fff9c4",
-            "accent2Color": "#eceff1",
-            "accent3Color": "rgba(255, 255, 255, 0.87)",
-            "borderColor": "#ffeb3b",
-            "canvasColor": "#424242",
-            "textColor": "#ffeb3b"
-        },
-        "appBar": {
-            "textColor": "#ffdc52",
-            "color": "#424242"
-        },
-        "menuItem": {
-            "selectedTextColor": "rgba(0, 0, 0, 0.26)",
-            "hoverColor": "#616161",
-            "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
-        }
-    });
-
+    "palette": {
+          "primary1Color": "#ffeb3b",
+          "primary2Color": "#ffeb3b",
+          "primary3Color": "#212121",
+          "accent1Color": "#fff9c4",
+          "accent2Color": "#eceff1",
+          "accent3Color": "rgba(255, 255, 255, 0.87)",
+          "borderColor": "##ffdc52",
+          "canvasColor": "#424242",
+          "textColor": "##ffdc52"
+      },
+      "appBar": {
+          "textColor": "#ffdc52",
+          "color": "#424242"
+      },
+      "menuItem": {
+          "selectedTextColor": "rgba(0, 0, 0, 0.26)",
+          "hoverColor": "#616161",
+          "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
+      }
+  });
 
 
 
@@ -72,7 +70,7 @@ const muiTheme = getMuiTheme({
           top: "7%",
           left: "35%",
           overflow:'hidden'
-      
+
         },
         changepaper: {
           height: 130,
@@ -85,7 +83,7 @@ const muiTheme = getMuiTheme({
             transform: "translate(-50%, -50%)",
             overflow:'hidden'
         },
-      
+
         ImageInput: {
           cursor: 'pointer',
           position: 'absolute',
@@ -160,7 +158,7 @@ class PostPage extends Component {
         // re-render
         this.setState({ tags: newTags });
     }
-  
+
     mySubmit(){
         if(!this.state.title || !this.state.description || this.state.tags.length < 1){
         alert("You must fill in all fields!")
@@ -170,22 +168,16 @@ class PostPage extends Component {
         }
     }
 
-  
+
     render() {
       const { tags } = this.state;
       return(
           <MuiThemeProvider muiTheme={muiTheme}>
           <div>
           <Paper style={styles.paper} zDepth={5} >
-          
-         
+
+
             <div>
-            <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
           <TextField className = "textbox"
                type="text"
                placeholder="Enter a title for you post..."
@@ -208,19 +200,19 @@ class PostPage extends Component {
                  <label><strong>Tags</strong></label>
          <br/>
           <br/>
-         
+
 
                <ReactTags
                             tags={this.state.tags}
                             handleDelete={this.handleDelete}
                             handleAddition={this.handleAddition}
-                            handleDrag={this.handleDrag} 
+                            handleDrag={this.handleDrag}
                         />
 
                         <footer>
-                        <RaisedButton 
-        label="POST" 
-        style={styles.button} 
+                        <RaisedButton
+        label="POST"
+        style={styles.button}
         backgroundColor = "#424242"
         onClick = {this.mySubmit}
         />
@@ -232,17 +224,16 @@ class PostPage extends Component {
       );
     }
   }
-  
-  
+
+
   const mapStateToProps = (state) => ({
     authUser: state.sessionState.authUser
   });
-  
-  
+
+
   const authCondition = (authUser) => !!authUser;
-  
+
   export default compose(
     withAuthorization(authCondition),
     connect(mapStateToProps)
   )(PostPage);
-  

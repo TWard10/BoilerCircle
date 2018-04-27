@@ -36,7 +36,7 @@ class LandingPage extends Component {
               "accent1Color": "#fff9c4",
               "accent2Color": "#eceff1",
               "accent3Color": "rgba(255, 255, 255, 0.87)",
-              "borderColor": "#ffeb3b",
+              "borderColor": "#ffdc52",
               "canvasColor": "#424242",
               "textColor": "#ffdc52"
           },
@@ -59,7 +59,7 @@ class LandingPage extends Component {
          textAlign: 'justify',
         display: 'inline-block',
         position: "fixed",
-          top: "35%",
+          top: "40%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           overflow:'hidden'
@@ -86,6 +86,7 @@ class LandingPage extends Component {
                     </div>
                     </div>
           </MuiThemeProvider>
+
         </div>
 
       )

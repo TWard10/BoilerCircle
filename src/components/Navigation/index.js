@@ -20,9 +20,9 @@ const muiTheme = getMuiTheme({
         "accent1Color": "#fff9c4",
         "accent2Color": "#eceff1",
         "accent3Color": "rgba(255, 255, 255, 0.87)",
-        "borderColor": "#ffeb3b",
+        "borderColor": "#ffdc52",
         "canvasColor": "#424242",
-        "textColor": "#ffeb3b"
+        "textColor": "#ffdc52"
     },
     "appBar": {
         "textColor": "#ffdc52",
@@ -54,7 +54,6 @@ class NavigationHeader extends Component {
       docked = {false}
       onRequestChange={(open)=>this.setState({open})}>
       <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
-      <Link to={routes.SIGN_IN}  style={{ textDecoration: 'none' }}><MenuItem>Log In</MenuItem></Link>
       <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
       <Link to={routes.ACCOUNT}  style={{ textDecoration: 'none' }}><MenuItem>Account</MenuItem></Link>
       </Drawer>
