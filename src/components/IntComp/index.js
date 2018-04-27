@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 //import './InterestPage.css';
-//import inter from '../Interests/ints'; 
+//import inter from '../Interests/ints';
 import Search from './Search';
 import OptionList from './OptionList';
 import InterestList from './InterestList';
@@ -1910,14 +1910,14 @@ const inter =  [
     id: 472,
     inter: 'Zumba'
     }
-]; 
+];
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
 });
 
 class InterestPage extends Component {
-  
+
   constructor(props){
     super(props)
 
@@ -1938,17 +1938,17 @@ class InterestPage extends Component {
 
    }
 
-   
+
 
    removeInterest(inter) {
     const { list } = this.state
     //list = list.slice(id)
-    
-    const id = list.indexOf(inter.id); 
+
+    const id = list.indexOf(inter.id);
     console.log('real id to be removed', id)
     //console.log('id to be removed', inter.id)
     const newList = list
-    newList.splice(id,1)  
+    newList.splice(id,1)
     this.setState({
       list: newList
     });
@@ -1956,16 +1956,16 @@ class InterestPage extends Component {
 
   submitInt(event){
     console.log('submit');
-    const sublist = []; 
+    const sublist = [];
     this.state.list.map( id =>{
-      sublist.push(inter[id].inter); 
+      sublist.push(inter[id].inter);
     })
     fs.updateUserInterests(this.props.authUser.uid, sublist);
     alert("Interests Updated");
-    
+
 
   }
- 
+
 
   update(val) {
     //var options = this.state.initText
@@ -1976,29 +1976,34 @@ class InterestPage extends Component {
     });
   }
 
-  
+
   render() {
     //const options = this.state.list;
 console.log('render', this.state.list)
 //const inter = [1,2,3,4]
     return(
+
+<div >
+
 <div>
-  <Search 
+
+  <Search
   initText={this.state.initText}
   update = {this.update.bind(this)}
   />
+  </div>
 
-  
+
   <div >
-  <main>
-    <OptionList 
+
+    <OptionList
     picked = {this.state.list}
     intList = {inter}
     removeint = {this.removeInterest.bind(this)}
     submitInt = {this.submitInt.bind(this)}
      />
 
-  <InterestList 
+  <InterestList
   inter={inter}
   initText = {this.state.initText}
   addint={this.addInterest.bind(this)}
@@ -2006,7 +2011,7 @@ console.log('render', this.state.list)
 
   />
 
-</main>
+
 
 </div>
 </div>
