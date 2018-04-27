@@ -10,7 +10,7 @@ import * as routes from '../../constants';
 
 
 const muiTheme = getMuiTheme({
-        
+
       "palette": {
             "primary1Color": "#ffeb3b",
             "primary2Color": "#ffeb3b",
@@ -47,7 +47,7 @@ const muiTheme = getMuiTheme({
 
 export default ({picked, intList, removeint, submitInt}) => {
    const hasInts = (picked.length > 0);
-   
+
 
     const styles = {
         chip: {
@@ -59,7 +59,7 @@ export default ({picked, intList, removeint, submitInt}) => {
           //width: 5,
          // opacity: 0.5,
          //visibility: 'hidden',
-          
+
         },
         button: {
         margin: 12,
@@ -68,32 +68,32 @@ export default ({picked, intList, removeint, submitInt}) => {
       };
 
     const idList = picked
-    
-    
+
+
     .map( (id) => {
 
         const interest = intList[id].inter
         //console.log('id for name', id)
 
 
-    
+
           return(
-           
-               
-             
+
+
+
  <MuiThemeProvider muiTheme={muiTheme}>
-             <Chip 
+             <Chip
 
                 onRequestDelete={() => removeint(intList[id])}
                 style = {StyleSheet.chip}
-        
+
                 >
-                {interest} 
+                {interest}
              </Chip>
              </MuiThemeProvider>
-             
-            
-            
+
+
+
           )
         }
     )
@@ -102,26 +102,26 @@ export default ({picked, intList, removeint, submitInt}) => {
             <div >
                 <h3>
                 <ul>
-                
+
                     {idList}
-                   
+
                     </ul>
                     </h3>
                     <h4>
 
         {hasInts
 
-        ?  <Link to={routes.HOME} style={{textDecoration: 'none'}}><RaisedButton 
-        label="SUBMIT" 
-        style={styles.button} 
+        ?  <Link to={routes.HOME} style={{textDecoration: 'none'}}><RaisedButton
+        label="SUBMIT"
+        style={styles.button}
         backgroundColor = "#424242"
         onClick = {() => submitInt()}
         /></Link>
-        
+
         :  'Click on an Interest to shortlist it...'
-          
+
         }
-        
+
       </h4>
             </div>
             </MuiThemeProvider>

@@ -97,11 +97,11 @@ class HomePage extends Component {
       displayName: '',
       interest: [],
       avatarURL: '',
-      posts: [], 
+      posts: [],
       following: [],
       postImage: ''
     };
-    
+
   }
 
   componentWillMount() {
@@ -174,7 +174,7 @@ class HomePage extends Component {
       })
     })
 
-    
+
   }
 
   filterSearch(item){
@@ -206,16 +206,19 @@ class HomePage extends Component {
   makepost(tag, user, title, disc, photo){
     //this.getImage(photo);l
     const hold = <div>
+
          <ListItem
-          leftAvatar = {<img className="resizePic" src={photo} />}
+
+
+          leftAvatar = {<Avatar size={85} src={photo} />}
           /* leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />} */
-          rightAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />} 
+          rightAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" labelStyle={{height: '50px'}}/>}
               
           primaryText={
                   <p>{user}</p>
-      
+
                 }
-    
+
               secondaryText={
                 
           <p><span style={{color: white}}>
@@ -224,16 +227,17 @@ class HomePage extends Component {
               }
               secondaryTextLines={2}
             />
-            <Divider style="width:10px;" />
-      </div> ;
-   
+          
+      </div>
+        ;
+
 
   //const newArr = this.state.posts.concat(hold);
   console.log(this.state.posts);
   this.setState({
     posts: this.state.posts.concat(hold)
   });
-    
+
   }
 
   render() {
@@ -246,7 +250,7 @@ class HomePage extends Component {
         avURL = (<img className='resize' src={this.state.avatarURL} />)
       }else{
         fs.getUser(this.props.authUser.uid).then(doc => {
-          
+
             this.setState({
               avatarURL: doc.data().photoURL
             })
@@ -255,16 +259,17 @@ class HomePage extends Component {
         avURL = this.state.avatarURL;
       }
       const allPosts = this.state.posts.map((item) => {
+        console.log(item)
         return item;
       })
       const interestList = this.state.interest.map((inter)=>{
           return <RaisedButton onClick={e => this.filterSearch(inter)} className="padded" label={inter} value={inter} fullWidth={true} backgroundColor={"#ffdc52"} labelColor={"#424242"} label={inter} labelColor={"#424242"}/>
       })
 
-  
+
     return (
       <MuiThemeProvider muiTheme = {muiTheme}>
-     
+
       <div className='pageBackground'>
         <div className='row'>
             <div className='column'>
@@ -291,13 +296,13 @@ class HomePage extends Component {
             </div>
             <div>
                <Paper style={styles.filler}>
-               
+
              
                <div className="scroll">
                <List>
               {allPosts}
               </List>
-              
+
                  </div>
 
                </Paper>

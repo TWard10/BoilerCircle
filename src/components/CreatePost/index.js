@@ -10,6 +10,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import './index.css';
 import { fullWhite } from 'material-ui/styles/colors';
+import * as routes from '../../constants';
+import { Link, withRouter } from 'react-router-dom';
 
 
 const muiTheme = getMuiTheme({
@@ -119,7 +121,7 @@ const muiTheme = getMuiTheme({
       };
 
 
-      
+
 
 const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
@@ -133,7 +135,7 @@ class PostPage extends Component {
             description: '',
             tags: [],
             displayName: '',
-            value: 0, 
+            value: 0,
             interest: [],
             photoURL: ''
 
@@ -155,8 +157,8 @@ class PostPage extends Component {
         })
     }
 
-   
-   
+
+
     mySubmit(){
         if(!this.state.title || !this.state.description){
         alert("You must fill in all fields!")
@@ -177,10 +179,10 @@ class PostPage extends Component {
 
       return(
 
-        
+
 
           <MuiThemeProvider muiTheme={muiTheme}>
-          <div>
+          <div className='pageBackground'>
           <Paper style={styles.paper} zDepth={5} >
 
 <br/><br/><br/><br/><br/><br/><br/><br/>
@@ -207,7 +209,7 @@ class PostPage extends Component {
 
    <br/>
           <br/>
-          <br/>       
+          <br/>
 <div>
 <DropDownMenu
           value={this.state.value}
@@ -215,7 +217,7 @@ class PostPage extends Component {
           style={styles.customWidth}
           autoWidth={false}
         >
-{ this.state.interest.map((inter, index) => 
+{ this.state.interest.map((inter, index) =>
   <MenuItem primaryText = {inter} value={index}/>
 )}
 </DropDownMenu>
@@ -225,14 +227,14 @@ class PostPage extends Component {
 
    <br/>
           <br/>
-          <br/> 
+          <br/>
                         <footer>
-                        <RaisedButton
+                        <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><RaisedButton
         label="POST"
         style={styles.button}
         backgroundColor = "#424242"
         onClick = {this.mySubmit}
-        />
+        /></Link>
                             </footer>
 
             </Paper>

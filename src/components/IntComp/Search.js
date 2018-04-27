@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 const muiTheme = getMuiTheme({
-        
+
       "palette": {
             "primary1Color": "#ffeb3b",
             "primary2Color": "#ffeb3b",
@@ -32,19 +32,19 @@ const muiTheme = getMuiTheme({
 
 class Search extends Component{
 
-   
+
 
 
     constructor(props){
         super(props)
         this.update = this.update.bind(this)
-      
+
         this.state = {
           refval: 'X',
         };
       }
 
-   
+
 
     update(event){
         this.setState({
@@ -56,33 +56,34 @@ class Search extends Component{
 
     render() {
        // console.log('init text', this.props.initText);
-       
-       
-       return(
 
+
+       return(
+         <div>
         <MuiThemeProvider muiTheme={muiTheme}>
          <header className = 'header'>
             <TextField
-            
+
             label="Search here...."
-               
+
                 type="text"
                 //ref={ (value) => {this.refval = value}}
-                placeholder="Type to filter interests..." 
+                placeholder="Type to filter interests..."
 
                 // inputRef={ (value) => this.setState({
                 //     refval: value
                 // })  }
                 onChange = {this.update}
                 >
-                
-               
-              
+
+
+
             </TextField>
            </header>
             </MuiThemeProvider>
-           
-           
+            </div>
+
+
         )
     }
 }
