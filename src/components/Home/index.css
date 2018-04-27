@@ -29,6 +29,10 @@
     max-height: 100%;
 }
 
+.title{
+    text-align: center;
+}
+
 .scroll{
   width: 100%;
     height: 45%;
