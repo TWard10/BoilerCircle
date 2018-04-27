@@ -56,6 +56,7 @@ class NavigationHeader extends Component {
       <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
       <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
       <Link to={routes.ACCOUNT}  style={{ textDecoration: 'none' }}><MenuItem>Account</MenuItem></Link>
+      <Link to={routes.INTER}  style={{ textDecoration: 'none' }}><MenuItem>Interests</MenuItem></Link>
       </Drawer>
       </MuiThemeProvider>
 
