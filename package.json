@@ -10,6 +10,7 @@
     "react-helmet": "^5.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-firebase-file-uploader": "^2.4.1",
     "react-scripts": "1.1.4",
     "react-tag-input": "^5.0.1"
   },
