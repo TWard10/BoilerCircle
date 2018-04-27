@@ -5,8 +5,69 @@ import AuthUserContext from '../../AuthUserContext';
 import { WithContext as ReactTags } from 'react-tag-input';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
+import './index.css';
+import { RaisedButton, Avatar, Paper, FloatingActionButton, List, MenuItem, TextField } from 'material-ui';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+const muiTheme = getMuiTheme({
+    "palette": {
+          "primary1Color": "#ffeb3b",
+          "primary2Color": "#ffeb3b",
+          "primary3Color": "#212121",
+          "accent1Color": "#fff9c4",
+          "accent2Color": "#eceff1",
+          "accent3Color": "rgba(255, 255, 255, 0.87)",
+          "borderColor": "#ffeb3b",
+          "canvasColor": "#424242",
+          "textColor": "#ffdc52"
+      },
+      "appBar": {
+          "textColor": "#ffdc52",
+          "color": "#424242"
+      },
+      "menuItem": {
+          "selectedTextColor": "rgba(0, 0, 0, 0.26)",
+          "hoverColor": "#616161",
+          "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
+      }
+  });
+  const styles ={
+  paper: {
+    height: 100,
+    width: 400,
+    textAlign: 'center',
 
+    // display: 'inline-block',
+    // position: "absolute",
+    // top: "65%",
+    // left: "35%",
+
+    display: 'inline-block',
+    position: "fixed",
+      top: "30%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      overflow:'hidden'
+  },
+  respaper: {
+    height: 400,
+    width: 400,
+    textAlign: 'center',
+
+    // display: 'inline-block',
+    // position: "absolute",
+    // top: "65%",
+    // left: "35%",
+
+    display: 'inline-block',
+    position: "fixed",
+      top: "56%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      overflow:'hidden'
+  }
+}
 
 const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
@@ -20,9 +81,10 @@ class FriendsPage extends Component {
         this.state = {
             name: '',
             people: [],
-            curFriends: []
+            curFriends: [],
+            showPaper: false
         }
-        
+
     }
 
     addFriend(){
@@ -48,20 +110,29 @@ class FriendsPage extends Component {
 
     doSearch(){
         console.log(this.state.name);
+        this.setState({showPaper: true})
+        console.log(this.state.showPaper)
         fs.getPeople(this.state.name).then((querySnapshot) => {
             if (!querySnapshot.empty) {
                  this.setState({
                      people: []
                  })
-     
+
                  querySnapshot.forEach(data => {
-                 var peeps = <button onClick={this.addFriend}>{data.data().displayName}</button>;
+                 var peeps =
+                 <RaisedButton
+                   label={data.data().displayName}
+                     style={styles.button}
+                     backgroundColor = "#ffdc52"
+                     labelColor = "#424242"
+                     onClick = {this.addFriend}
+                     />;
                  var joined = this.state.people.concat(peeps);
                  this.setState({
                      people: joined
-                 })  
+                 })
               });
-            } 
+            }
         });
     }
 
@@ -71,35 +142,52 @@ class FriendsPage extends Component {
                 curFriends: doc.data().friends
             })
         });
-      const { people } = this.state
+      const { people, showPaper } = this.state
+      
       return(
-        <div>
-            <input
+        <MuiThemeProvider muiTheme={muiTheme}>
+        <div className = 'pageBackground'>
+          <div>
+          <Paper style = {styles.paper}>
+          <div>
+            <TextField
                     onChange={event => this.setState(byPropKey('name', event.target.value))}
                     type="text"
-                    placeholder="Name"
+                    placeholder="Search Name"
             />
-
-            <button onClick={this.doSearch}>Search</ button>
-            <br/>
-            <br/>
-            <br/>
+            </div>
             <div>
-             {people}
+            <RaisedButton
+              label="SUBMIT"
+                style={styles.button}
+                backgroundColor = "#424242"
+                onClick = {this.doSearch}
+                />
+            </div>
+            </Paper>
+            <div>
+            {showPaper?
+             <Paper style={styles.respaper}>
+              <h1> People </h1>
+                {people}
+             </Paper>:
+             console.log()}
+            </div>
             </div>
         </div>
+        </MuiThemeProvider>
       );
     }
   }
-  
-  
+
+
   const mapStateToProps = (state) => ({
     authUser: state.sessionState.authUser
   });
-  
-  
+
+
   const authCondition = (authUser) => !!authUser;
-  
+
   export default compose(
     withAuthorization(authCondition),
     connect(mapStateToProps)

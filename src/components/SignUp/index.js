@@ -85,12 +85,12 @@ class SignUpForm extends Component {
               "accent1Color": "#fff9c4",
               "accent2Color": "#eceff1",
               "accent3Color": "rgba(255, 255, 255, 0.87)",
-              "borderColor": "#ffeb3b",
+              "borderColor": "#ffdc52",
               "canvasColor": "#424242",
-              "textColor": "#ffeb3b"
+              "textColor": "#ffdc52"
           },
           "appBar": {
-              "textColor": "#ffeb3b",
+              "textColor": "#ffdc52",
               "color": "#616161"
           },
           "menuItem": {

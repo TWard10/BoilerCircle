@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import AuthUserContext from '../../AuthUserContext';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
-import { RaisedButton, Avatar, Paper, FloatingActionButton, List, MenuItem, TextField } from 'material-ui'
+import { RaisedButton, Avatar, Paper, FloatingActionButton, List, MenuItem, TextField } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 //import man from '../../images/man.png'
@@ -25,7 +25,7 @@ const muiTheme = getMuiTheme({
           "accent3Color": "rgba(255, 255, 255, 0.87)",
           "borderColor": "#ffeb3b",
           "canvasColor": "#424242",
-          "textColor": "#ffeb3b"
+          "textColor": "#ffdc52"
       },
       "appBar": {
           "textColor": "#ffdc52",
@@ -68,8 +68,8 @@ const styles = {
       left: "50%",
       transform: "translate(-50%, -50%)",
       overflow:'hidden'
-   
-   
+
+
 
 
   },
@@ -94,7 +94,7 @@ const styles = {
       left: "50%",
       transform: "translate(-50%, -50%)",
       overflow:'hidden'
-    
+
     //display: 'inline-block',
 
   },
@@ -142,18 +142,18 @@ class AccountPage extends Component {
       super(props)
       this.handleSubmit = this.handleSubmit.bind(this);
       //his.fileChangedHandler = this.fileChangedHandler.bind(this);
-      //this.uploadHandler = this.uploadHandler.bind(this); 
+      //this.uploadHandler = this.uploadHandler.bind(this);
 
       this.state = {
         photoURL: '',
         displayName: '',
-        newDisplayName: '', 
+        newDisplayName: '',
         file: '',
         imagePreviewUrl: '',
-        email: '', 
+        email: '',
         pass: false,
-        name: false, 
-        avatar: false,  
+        name: false,
+        avatar: false,
 
 
         //module: null
@@ -182,7 +182,7 @@ class AccountPage extends Component {
 
   onClickName = () =>{
     this.setState({
-      
+
       name: !this.state.name,
       avatar: false,
       pass: false
@@ -190,11 +190,11 @@ class AccountPage extends Component {
 
     });
     console.log(this.state.name, " valll")
-   
+
 
   }
-    
-  
+
+
 
   onClickPass = () => {
     this.setState({
@@ -265,6 +265,7 @@ fileChangedHandler = (event) => {
 
   handleSubmit(){
     console.log(this.props.authUser.uid);
+    this.revertToOld(this.state.displayName)
     fs.updateUserInfo(this.props.authUser.uid, this.state.displayName, this.state.photoURL)
   }
 
@@ -273,10 +274,10 @@ fileChangedHandler = (event) => {
       email,
       displayName,
       photoURL,
-      newDisplayName, 
+      newDisplayName,
 
     } = this.state;
-    let src = '../../images/' + photoURL; 
+    let src = '../../images/' + photoURL;
 
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
@@ -295,17 +296,17 @@ fileChangedHandler = (event) => {
 
       <Paper style={styles.cpaper} zDepth={5} circle={true} >
 
-      
-      
-      
-      
+
+
+
+
           {$imagePreview}
-       
-         
+
+
 
       </Paper>
 
-      
+
 
 
       {this.state.name ?
@@ -317,18 +318,18 @@ fileChangedHandler = (event) => {
                placeholder={displayName}
                value = {newDisplayName}
                onChange={event => this.setState(byPropKey('newDisplayName', event.target.value))
-            }  
+            }
                />
                </div>
-               
-               <RaisedButton 
-        label="SUBMIT" 
-        style={styles.button} 
+
+               <RaisedButton
+        label="SUBMIT"
+        style={styles.button}
         backgroundColor = "#424242"
         onClick = {this.onClickShut}
         />
-             
-         
+
+
       </Paper>
        </div>
       : console.log('else')
@@ -342,30 +343,30 @@ fileChangedHandler = (event) => {
       <div className= "email">
       <Paper style={styles.changepaper} zDepth={5} >
       <div>
-      
-        
-        <RaisedButton 
+
+
+        <RaisedButton
         label = "Upload an image"
-        style={styles.button} 
+        style={styles.button}
         backgroundColor = "#424242">
           <input style={styles.ImageInput}
-            type="file" 
+            type="file"
             onChange={(e)=>this._handleImageChange(e)} />
-          {/* <button className="submitButton" 
-            type="submit" 
+          {/* <button className="submitButton"
+            type="submit"
             onClick={(e)=>this._handleSubmit(e)}>Upload Image</button> */}
-       </RaisedButton> 
-          
+       </RaisedButton>
+
                </div>
-               
-               <RaisedButton 
-        label="SUBMIT" 
-        style={styles.button} 
+
+               <RaisedButton
+        label="SUBMIT"
+        style={styles.button}
         backgroundColor = "#424242"
         onClick = {this.onClickShut}
         />
-             
-         
+
+
       </Paper>
        </div>
       : console.log('else')
@@ -382,16 +383,16 @@ fileChangedHandler = (event) => {
       <div>
       <PasswordChangeForm/>
         </div>
-        
-               
-               <RaisedButton 
-        label="SUBMIT" 
-        style={styles.button} 
+
+
+               <RaisedButton
+        label="SUBMIT"
+        style={styles.button}
         backgroundColor = "#424242"
         onClick = {this.onClickShut}
         />
-             
-         
+
+
       </Paper>
        </div>
       : console.log('else')
@@ -402,13 +403,11 @@ fileChangedHandler = (event) => {
 
 
 
-     
+
 
       <Paper style={styles.paper} zDepth={5}>
-
-      <h4> Display Name: <RaisedButton label = {displayName} backgroundColor = "#424242" primary1Color = "#424242" /> </h4>
-      <h4> Email Address: {email}</h4>
-      
+      <h4> <font color="#ffdc52"> Display Name: {displayName}</font>  </h4>
+      <h4><font color="#ffdc52"> Email Address: {email}</font></h4>
       <footer>
         <List>
         <MenuItem onClick={this.onClickName}> Change Display Name </MenuItem>
@@ -421,11 +420,11 @@ fileChangedHandler = (event) => {
 
       </div>
 
-       
-      
-      
+
+
+
       </MuiThemeProvider>
-     
+
     );
   }
 }

@@ -25,7 +25,7 @@ export const updateUserInterests = (id, newInterests) =>
   fs.collection('users').doc(id).update({
     interests: newInterests
   })
- 
+
 
 export const addPost = (id, displayName, title, description, tags) =>
   fs.collection('posts').doc().set({
@@ -52,5 +52,3 @@ export const getPosts = (id, tag) =>
 
 export const getUser = (id) =>
   fs.collection('users').doc(id).get()
-
-
