@@ -56,6 +56,7 @@ class NavigationHeader extends Component {
       <Link to={routes.LANDING}  style={{ textDecoration: 'none' }}><MenuItem>Landing</MenuItem></Link>
       <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
       <Link to={routes.ACCOUNT}  style={{ textDecoration: 'none' }}><MenuItem>Account</MenuItem></Link>
+      <Link to={routes.FRIENDS}  style={{ textDecoration: 'none' }}><MenuItem>Follow Your Friends</MenuItem></Link>
       <Link to={routes.POST_PAGE}  style={{ textDecoration: 'none' }}><MenuItem>Create A Post</MenuItem></Link>
       </Drawer>
       </MuiThemeProvider>

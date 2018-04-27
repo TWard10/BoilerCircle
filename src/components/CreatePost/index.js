@@ -148,6 +148,7 @@ class PostPage extends Component {
         fs.getUser(this.props.authUser.uid).then(doc => {
             this.setState({
                interest: doc.data().interests,
+               displayName: doc.data().displayName
             })
         })
     }

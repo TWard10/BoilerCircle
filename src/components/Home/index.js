@@ -88,6 +88,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.getAllPosts = this.getAllPosts.bind(this)
+    this.makepost = this.makepost.bind(this);
     this.state = {
       users: null,
       displayName: '',
@@ -96,15 +97,10 @@ class HomePage extends Component {
       posts: [], 
       following: []
     };
-    this.makepost = this.makepost.bind(this);
+    
   }
 
-  componentDidMount() {
-    this.makepost('cocker', 'mark', 'rick james', 'hey everyone i am a dirty whore')
-    this.makepost('cocker2', 'james', 'rick morty', 'hey everyone i am NOT a dirty whore')
-    this.makepost('cocker3', 'james', 'rick morty', 'hey everyone i am NOT a dirty whore')
-
-
+  componentWillMount() {
     const { onSetUsers } = this.props;
     fs.getUser(this.props.authUser.uid).then(doc => {
           if(doc.exists){
@@ -131,79 +127,72 @@ class HomePage extends Component {
   }
 
   getAllPosts() {
+    console.log("check");
     var dbPromises = [];
     var holdInterest = this.state.interest;
     var holdFriends = this.state.following;
 
-    fs.getQueryPost()
-      .where("displayName", "==", "Ian Zimmer")
-      .where("tags", "==", "cocker")
-      .get()
-      .then((querySnapshots) => {
-          querySnapshots.forEach(doc => {
-            console.log(doc.data())
-          })
-      })
+    this.setState({
+      posts: []
+    })
 
-   /*  for(var i = 0; i < holdInterest.length; i++){
+   for(var i = 0; i < holdInterest.length; i++){
       for(var j = 0; j < holdFriends.length; j++){
-        dbPromises.push(
+        console.log(holdFriends[j] + " ::: " + holdInterest[i])
           fs.getQueryPost()
-            .where("displayName", "==", holdFriends[j])
-            .orderBy("Date")
+            .where('displayName', '==', holdFriends[j])
+            .where('tags', '==', holdInterest[i])
             .get()
-        )
+            .then(doc => {
+                doc.forEach((mydoc) => {
+                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description)
+                })
+            })
       }
     }
-    Promise.all(dbPromises)
-      .then((querySnapshots) => {
-        return querySnapshots.map(qs => qs.docs)
-                             .reduce((acc, docs) => [...acc, ...docs])
-      }).then((mathcingArticleRefs) => {
-        mathcingArticleRefs.map(doc => {
-          console.log(doc.data());
-        })
-      }) */
+
+    dbPromises.forEach((doc) => {
+      doc.get().then(doc => {
+        console.log(doc.title);
+      })
+    })
+
     
   }
 
   makepost(tag, user, title, disc){
-
-   
-
-    const arr = this.state.posts.push(
-        <div>
+    const hold = <div>
          <ListItem
     
-    leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
-    rightAvatar = {<RaisedButton label={user} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
+          leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
+          rightAvatar = {<RaisedButton label={user} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
               
-        primaryText={
-                <p>{title}</p>
-    
-              }
+          primaryText={
+                  <p>{title}</p>
+      
+                }
     
               secondaryText={
                 
-      <p><span style={{color: white}}>
+          <p><span style={{color: white}}>
                   {disc}
              </span> </p>
               }
               secondaryTextLines={2}
             />
             <Divider inset={true} />
-    </div>
-    )
+      </div> ;
+   
 
-  console.log('arr', arr)
+  //const newArr = this.state.posts.concat(hold);
+  console.log(this.state.posts);
   this.setState({
-    posts: arr
+    posts: this.state.posts.concat(hold)
   });
     
   }
 
   render() {
-
     console.log('posts', this.state.posts)
 
       const { users} = this.state;
@@ -221,19 +210,17 @@ class HomePage extends Component {
         })
         avURL = this.state.avatarURL;
       }
-        console.log(this.state.interest)
-      const allPosts = Object.keys(this.state.posts).map((item) => {
-        return 
+      const allPosts = this.state.posts.map((item) => {
+        return item;
       })
       const interestList = this.state.interest.map((inter)=>{
           return <RaisedButton label={inter} disabled={true} fullWidth={true} disabledBackgroundColor={"#ffdc52"} disabledLabelColor={"#424242"} label={inter} labelColor={"#424242"}/>
       })
 
-      
-      console.log(interestList)
+  
     return (
-
       <MuiThemeProvider muiTheme = {muiTheme}>
+     
       <div className='pageBackground'>
         <div className='row'>
             <div className='column'>
@@ -260,8 +247,7 @@ class HomePage extends Component {
             <div>
                <Paper style={styles.filler}>
                
-             <h1>Feed</h1>
-            
+             <button onClick={this.getAllPosts}>Refresh Feed</ button>
                <div className="scroll">
                <List>
               {allPosts}
