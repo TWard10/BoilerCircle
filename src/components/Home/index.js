@@ -92,12 +92,9 @@ class HomePage extends Component {
       users: null,
       displayName: '',
       interest: [],
-<<<<<<< HEAD
       avatarURL: '',
       posts: [], 
-=======
       following: []
->>>>>>> 8161b4c10ba6398d1d960a24bce12f821549a242
     };
   }
 
