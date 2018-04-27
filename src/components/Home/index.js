@@ -224,7 +224,7 @@ class HomePage extends Component {
               }
               secondaryTextLines={2}
             />
-            <Divider inset={true} />
+            <Divider style="width:10px;" />
       </div> ;
    
 
