@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { auth } from '../../firebase';
+import './index.css'
 
 
 
@@ -164,7 +165,7 @@ class PasswordChangeForm extends Component {
           type="password"
           placeholder="Confirm New Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <button className="butt" disabled={isInvalid} type="submit">
           Reset My Password
         </button>
         {/* <RaisedButton 

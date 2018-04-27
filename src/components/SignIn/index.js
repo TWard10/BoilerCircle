@@ -138,10 +138,11 @@ class SignInForm extends Component {
            </div>
 
          </form>
+
        </div>
        <div className="move">
          <SignUpLink />
-         { error && <p>{error.message}</p> }
+         { error && <h1>{error.message}</h1> }
          </div>
       </div>
 

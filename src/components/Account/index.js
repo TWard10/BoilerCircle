@@ -12,6 +12,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import PasswordChangeForm from '../PasswordChange'
 import FileUploader from 'react-firebase-file-uploader';
 import firebase from 'firebase';
+import * as routes from '../../constants';
+import { Link, withRouter } from 'react-router-dom';
 
 
 
@@ -399,9 +401,10 @@ fileChangedHandler = (event) => {
       <PasswordChangeForm/>
         </div>
 
-
+<br/>
+<br/>
                <RaisedButton
-        label="SUBMIT"
+        label="CLOSe"
         style={styles.button}
         backgroundColor = "#424242"
         onClick = {this.onClickShut}
@@ -428,6 +431,7 @@ fileChangedHandler = (event) => {
         <MenuItem onClick={this.onClickName}> Change Display Name </MenuItem>
         <MenuItem onClick={this.onClickAvatar}> Change Avatar </MenuItem>
         <MenuItem onClick={this.onClickPass}> Change Password </MenuItem>
+        <Link to={routes.INTER}  style={{ textDecoration: 'none' }}><MenuItem>Reset Interests</MenuItem></Link>
       </List>
         </footer>
 
