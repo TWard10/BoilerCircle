@@ -8,6 +8,7 @@ export const PASSWORD_FORGET = '/pw-forget';
 export const HOME = '/home';
 export const INTER = '/options';
 export const FRIENDS = '/friends';
+export const TURK = './support'
 export default {
     SIGN_IN,
     SIGN_UP,
