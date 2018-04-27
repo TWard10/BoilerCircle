@@ -3,7 +3,9 @@ import { Chip, Avatar, RaisedButton } from 'material-ui';
 import theme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //import Button from 'material-ui/Button';
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { Link, withRouter } from 'react-router-dom';
+import * as routes from '../../constants';
 
 
 
@@ -109,12 +111,12 @@ export default ({picked, intList, removeint, submitInt}) => {
 
         {hasInts
 
-        ?  <RaisedButton 
+        ?  <Link to={routes.HOME} style={{textDecoration: 'none'}}><RaisedButton 
         label="SUBMIT" 
         style={styles.button} 
         backgroundColor = "#424242"
         onClick = {() => submitInt()}
-        />
+        /></Link>
         
         :  'Click on an Interest to shortlist it...'
           

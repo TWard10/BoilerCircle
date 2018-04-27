@@ -20,12 +20,14 @@ export const updatePhoto = (id, photo) =>
     photoURL: photo
   })
 
+export const getQueryPost = () =>
+  fs.collection('posts')
+
 
 export const updateUserInterests = (id, newInterests) =>
   fs.collection('users').doc(id).update({
     interests: newInterests
   })
-
 
 export const addPost = (id, displayName, title, description, tags) =>
   fs.collection('posts').doc().set({

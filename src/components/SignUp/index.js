@@ -54,7 +54,7 @@ class SignUpForm extends Component {
         .then(authUser => {
             fs.addUser(authUser.uid, username, email);
             this.setState(() => ({ ...INITIAL_STATE }));
-            history.push(routes.HOME);
+            history.push(routes.INTER);
           })
         .catch(error => {
           this.setState(byPropKey('error', error));
