@@ -6,7 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 
 const muiTheme = getMuiTheme({
-        
+
       "palette": {
             "primary1Color": "#ffeb3b",
             "primary2Color": "#ffeb3b",
@@ -14,9 +14,9 @@ const muiTheme = getMuiTheme({
             "accent1Color": "#fff9c4",
             "accent2Color": "#eceff1",
             "accent3Color": "rgba(255, 255, 255, 0.87)",
-            "borderColor": "#ffeb3b",
+            "borderColor": "#ffdc52",
             "canvasColor": "#424242",
-            "textColor": "#ffeb3b"
+            "textColor": "#ffdc52"
         },
         "appBar": {
             "textColor": "#ffdc52",
@@ -45,38 +45,36 @@ export default ({inter, initText, addint, pickedList}) =>{
         return pickedList.indexOf(inter.id)===-1 && inter.inter.toLowerCase().indexOf(initText) >= 0
     })
     .map(inter => {
-     
+
       return(
         <MuiThemeProvider getMuiTheme={getMuiTheme}>
-            
-       
-       
+
+
+
        <RB label={inter.inter}  style={style}
         labelColor = "#ffdc52" backgroundColor = "#424242"
 
        onClick={() => addint(inter.id)}>
-       
-    
-       
+
+
+
        </RB>
-       
+
        </MuiThemeProvider>
      )
     });
 
     return (
-      
+
     <div>
         <ul>
         {interList}
       </ul>
-     
+
 </div>
-      
-      
+
+
 
     );
-      
+
      }
-
-

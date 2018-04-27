@@ -283,7 +283,7 @@ checkbox {
     .trans{
         backgroundColor:'transparent';
         height: 512;
-        width: 512;
+        width: 512; 
         border-radius: 50%
     }
 
@@ -306,7 +306,7 @@ checkbox {
             overflow: auto;
             font-size: 16px;
           }
-
+          
           .emailBar input[type="text"], input[type="password"] {
             border: none;
             border-bottom: 1px solid white;
@@ -314,13 +314,9 @@ checkbox {
             outline: none;
             color: #ffeb3b;
           }
-
+          
           .emailBar a {
             text-decoration: none;
             font-size: 14px;
             color:#ffeb3b;
           }
-
-.h4{
-  color: "#ffdc52";
-}
