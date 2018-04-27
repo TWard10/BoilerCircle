@@ -180,7 +180,12 @@ class PostPage extends Component {
           
          
             <div>
-           
+            <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <TextField className = "textbox"
                type="text"
                placeholder="Enter a title for you post..."

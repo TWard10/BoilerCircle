@@ -253,6 +253,8 @@ class AccountPage extends Component {
         file: file,
         imagePreviewUrl: reader.result
       });
+      console.log("file ", file)
+      
     }
 
     reader.readAsDataURL(file)
