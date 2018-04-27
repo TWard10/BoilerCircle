@@ -59,7 +59,7 @@ class LandingPage extends Component {
          textAlign: 'justify',
         display: 'inline-block',
         position: "fixed",
-          top: "35%",
+          top: "40%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           overflow:'hidden'

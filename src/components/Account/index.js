@@ -10,6 +10,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 //import man from '../../images/man.png'
 //import FileUploader from 'react-firebase-file-uploader';
 import PasswordChangeForm from '../PasswordChange'
+import FileUploader from 'react-firebase-file-uploader';
+import firebase from 'firebase';
 
 
 
@@ -153,8 +155,11 @@ class AccountPage extends Component {
         email: '', 
         pass: false,
         name: false, 
-        avatar: false,  
-
+        avatarBol: false,  
+        isUploading: false,
+        progress: 0,
+        avatar: '',
+        avatarURL: ''
 
         //module: null
       }
@@ -184,30 +189,41 @@ class AccountPage extends Component {
     this.setState({
       
       name: !this.state.name,
-      avatar: false,
+      avatarBol: false,
       pass: false
 
 
     });
     console.log(this.state.name, " valll")
-   
-
-  }
+   }
     
-  
+   handleChangeUsername = (event) => this.setState({username: event.target.value});
+   handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+   handleProgress = (progress) => this.setState({progress});
+   handleUploadError = (error) => {
+   this.setState({isUploading: false});
+   console.error(error);
+   }
+   handleUploadSuccess = (filename) => {
+   this.setState({avatar: filename, progress: 100, isUploading: false});
+   firebase.storage().ref('images').child(filename).getDownloadURL().then(url => {
+     this.setState({avatarURL: url})
+     fs.updatePhoto(this.props.authUser.uid, url);
+   });
+   };
 
   onClickPass = () => {
     this.setState({
       pass: !this.state.pass,
       name:false,
-      avatar: false
+      avatarBol: false
 
     });
   }
 
   onClickAvatar=()=>{
     this.setState({
-      avatar: !this.state.avatar,
+      avatarBol: !this.state.avatarBol,
       name: false,
       pass: false
 
@@ -217,7 +233,7 @@ class AccountPage extends Component {
 
   onClickShut=()=>{
     this.setState({
-      avatar: false,
+      avatarBol: false,
       name: false,
       pass: false
 
@@ -229,8 +245,8 @@ class AccountPage extends Component {
       fs.updateUsername(this.props.authUser.uid, this.state.newDisplayName);
     }
 
-    if(this.state.imagePreviewUrl){
-      fs.updatePhoto(this.props.authUser.uid, this.state.imagePreviewUrl);
+    if(this.state.avatarURL){
+      fs.updatePhoto(this.props.authUser.uid, this.state.avatarURL);
     }
 
   }
@@ -242,21 +258,6 @@ class AccountPage extends Component {
     console.log('handle uploading-', this.state.file);
   }
 
-  _handleImageChange(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
-    }
-
-    reader.readAsDataURL(file)
-  }
 
 fileChangedHandler = (event) => {
   this.setState({selectedFile: event.target.files[0]})
@@ -278,13 +279,18 @@ fileChangedHandler = (event) => {
     } = this.state;
     let src = '../../images/' + photoURL; 
 
-    let {imagePreviewUrl} = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
-      console.log("ig url", imagePreviewUrl)
+    let {avatarURL} = this.state;
+    let avURL = null;
+    if (avatarURL) {
+      avURL = (<img src={this.state.avatarURL} />);
+      console.log("ig url", this.state.avatarURL)
     } else {
-      $imagePreview = (<div className="previewText"></div>);
+      fs.getUser(this.props.authUser.uid).then(doc => {
+        this.setState({
+          avatarURL: doc.data().photoURL
+        })
+      })
+      avURL = (<img src={this.state.avatarURL} />);
       console.log("else url")
     }
 
@@ -299,7 +305,7 @@ fileChangedHandler = (event) => {
       
       
       
-          {$imagePreview}
+          {avURL}
        
          
 
@@ -338,13 +344,13 @@ fileChangedHandler = (event) => {
 
 
 
-      {this.state.avatar ?
+      {this.state.avatarBol ?
       <div className= "email">
       <Paper style={styles.changepaper} zDepth={5} >
       <div>
       
         
-        <RaisedButton 
+      {/*  <RaisedButton 
         label = "Upload an image"
         style={styles.button} 
         backgroundColor = "#424242">
@@ -353,8 +359,17 @@ fileChangedHandler = (event) => {
             onChange={(e)=>this._handleImageChange(e)} />
           {/* <button className="submitButton" 
             type="submit" 
-            onClick={(e)=>this._handleSubmit(e)}>Upload Image</button> */}
-       </RaisedButton> 
+            onClick={(e)=>this._handleSubmit(e)}>Upload Image</button> }
+       </RaisedButton> */}
+
+       <FileUploader
+          accept="image/*"
+          storageRef={firebase.storage().ref('images')}
+          onUploadStart={this.handleUploadStart}
+          onUploadError={this.handleUploadError}
+          onUploadSuccess={this.handleUploadSuccess}
+          onProgress={this.handleProgress}
+       />
           
                </div>
                
