@@ -2,6 +2,11 @@
 
 Social media without the clutter, and an emphasis on your interests
 
+## Developers
+* Tanner Ward - ward166@purdue.edu
+* Muhannad Alhumaidi - malhumai@purdue.edu
+* Ian Zimmer - zimmeri@purdue.edu
+
 ## Prerequisites
 * Yarn
 * Firebase
