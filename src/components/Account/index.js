@@ -406,10 +406,8 @@ fileChangedHandler = (event) => {
 
 
       <Paper style={styles.paper} zDepth={5}>
-
-      <h4> Display Name: {displayName}  </h4>
-      <h4> Email Address: {email}</h4>
-
+      <h4> <font color="#ffdc52"> Display Name: {displayName}</font>  </h4>
+      <h4><font color="#ffdc52"> Email Address: {email}</font></h4>
       <footer>
         <List>
         <MenuItem onClick={this.onClickName}> Change Display Name </MenuItem>
