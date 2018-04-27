@@ -72,8 +72,8 @@ const muiTheme = getMuiTheme({
     },
 
     filler: {
-      height: '60%',
-      width: 800,
+      height: '80%',
+      width: 1200,
       position: "fixed",
       top: "50%",
       left: "60%",
@@ -89,6 +89,7 @@ class HomePage extends Component {
     super(props);
     this.getAllPosts = this.getAllPosts.bind(this)
     this.makepost = this.makepost.bind(this);
+    this.filterSearch = this.filterSearch.bind(this);
     this.state = {
       users: null,
       displayName: '',
@@ -160,15 +161,47 @@ class HomePage extends Component {
     
   }
 
+  filterSearch(item){
+    console.log("check");
+    var dbPromises = [];
+    var holdInterest = this.state.interest;
+    var holdFriends = this.state.following;
+
+    this.setState({
+      posts: []
+    })
+
+   for(var i = 0; i < holdInterest.length; i++){
+      for(var j = 0; j < holdFriends.length; j++){
+        console.log(holdFriends[j] + " ::: " + holdInterest[i])
+          fs.getQueryPost()
+            .where('displayName', '==', holdFriends[j])
+            .where('tags', '==', item)
+            .get()
+            .then(doc => {
+                doc.forEach((mydoc) => {
+                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description)
+                })
+            })
+      }
+    }
+
+    dbPromises.forEach((doc) => {
+      doc.get().then(doc => {
+        console.log(doc.title);
+      })
+    })
+  }
+
   makepost(tag, user, title, disc){
     const hold = <div>
          <ListItem
     
-          leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
-          rightAvatar = {<RaisedButton label={user} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
+          /* leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />} */
+          rightAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />} 
               
           primaryText={
-                  <p>{title}</p>
+                  <p>{user}</p>
       
                 }
     
@@ -214,7 +247,7 @@ class HomePage extends Component {
         return item;
       })
       const interestList = this.state.interest.map((inter)=>{
-          return <RaisedButton label={inter} disabled={true} fullWidth={true} disabledBackgroundColor={"#ffdc52"} disabledLabelColor={"#424242"} label={inter} labelColor={"#424242"}/>
+          return <RaisedButton onClick={e => this.filterSearch(inter)} className="padded" label={inter} value={inter} fullWidth={true} backgroundColor={"#ffdc52"} labelColor={"#424242"} label={inter} labelColor={"#424242"}/>
       })
 
   
@@ -240,6 +273,7 @@ class HomePage extends Component {
                       <h3>Interests</h3>
                       </Paper>
                     <div className='scroll'>
+                      <RaisedButton onClick={this.getAllPosts} className="padded" label={"Get all posts"} fullWidth={true} backgroundColor={"#ffdc52"} labelColor={"#424242"} labelColor={"#424242"}/>
                       {interestList}
                     </div>
                 </Paper>
@@ -247,12 +281,12 @@ class HomePage extends Component {
             <div>
                <Paper style={styles.filler}>
                
-             <button onClick={this.getAllPosts}>Refresh Feed</ button>
+             
                <div className="scroll">
                <List>
               {allPosts}
               </List>
-
+              
                  </div>
 
                </Paper>
