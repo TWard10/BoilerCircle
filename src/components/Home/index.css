@@ -22,6 +22,11 @@
         align-content: center
       }
 
+.resizePic {
+    height: 110px;
+    width: 110px;
+}
+
 .resize {
     height: auto;
     width: auto;

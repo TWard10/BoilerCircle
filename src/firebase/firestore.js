@@ -29,13 +29,14 @@ export const updateUserInterests = (id, newInterests) =>
     interests: newInterests
   })
 
-export const addPost = (id, displayName, title, description, tags) =>
+export const addPost = (id, displayName, title, description, tags, photoURL) =>
   fs.collection('posts').doc().set({
     title: title,
     displayName: displayName,
     description: description,
     tags: tags,
     Date: Date.now(),
+    photoURL: photoURL,
     uid: id
   }).then(function() {
     console.log("Document successfully written!");

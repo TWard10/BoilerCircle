@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import withAuthorization from '../../withAuthorization';
-import { firebase } from '../../firebase';
+import firebase from 'firebase';
 import './index.css'
 import { RaisedButton, Avatar, Paper, FlatButton, MenuItem, TextField,Divider, List, ListItem, Subheader  } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -90,19 +90,23 @@ class HomePage extends Component {
     this.getAllPosts = this.getAllPosts.bind(this)
     this.makepost = this.makepost.bind(this);
     this.filterSearch = this.filterSearch.bind(this);
+    this.getImage = this.getImage.bind(this);
+    this.clear = this.clear.bind(this);
     this.state = {
       users: null,
       displayName: '',
       interest: [],
       avatarURL: '',
       posts: [], 
-      following: []
+      following: [],
+      postImage: ''
     };
     
   }
 
   componentWillMount() {
     const { onSetUsers } = this.props;
+
     fs.getUser(this.props.authUser.uid).then(doc => {
           if(doc.exists){
             this.setState({
@@ -127,15 +131,27 @@ class HomePage extends Component {
 
   }
 
+  getImage(image){
+    firebase.storage().ref().child(image).getDownloadURL().then((url) => {
+      this.setState({
+        postImage: url
+      })
+    })
+  }
+
+  clear(){
+    this.setState({
+      posts:[]
+    })
+  }
+
   getAllPosts() {
     console.log("check");
     var dbPromises = [];
     var holdInterest = this.state.interest;
     var holdFriends = this.state.following;
 
-    this.setState({
-      posts: []
-    })
+    this.clear();
 
    for(var i = 0; i < holdInterest.length; i++){
       for(var j = 0; j < holdFriends.length; j++){
@@ -146,7 +162,7 @@ class HomePage extends Component {
             .get()
             .then(doc => {
                 doc.forEach((mydoc) => {
-                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description)
+                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description, mydoc.data().photoURL)
                 })
             })
       }
@@ -167,23 +183,17 @@ class HomePage extends Component {
     var holdInterest = this.state.interest;
     var holdFriends = this.state.following;
 
-    this.setState({
-      posts: []
-    })
-
-   for(var i = 0; i < holdInterest.length; i++){
+    this.clear();
       for(var j = 0; j < holdFriends.length; j++){
-        console.log(holdFriends[j] + " ::: " + holdInterest[i])
           fs.getQueryPost()
             .where('displayName', '==', holdFriends[j])
             .where('tags', '==', item)
             .get()
             .then(doc => {
                 doc.forEach((mydoc) => {
-                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description)
+                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description, mydoc.data().photoURL)
                 })
             })
-      }
     }
 
     dbPromises.forEach((doc) => {
@@ -193,10 +203,11 @@ class HomePage extends Component {
     })
   }
 
-  makepost(tag, user, title, disc){
+  makepost(tag, user, title, disc, photo){
+    //this.getImage(photo);l
     const hold = <div>
          <ListItem
-    
+          leftAvatar = {<img className="resizePic" src={photo} />}
           /* leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />} */
           rightAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />} 
               

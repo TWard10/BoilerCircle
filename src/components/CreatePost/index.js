@@ -135,6 +135,7 @@ class PostPage extends Component {
             displayName: '',
             value: 0, 
             interest: [],
+            photoURL: ''
 
         }
         this.mySubmit = this.mySubmit.bind(this);
@@ -148,7 +149,8 @@ class PostPage extends Component {
         fs.getUser(this.props.authUser.uid).then(doc => {
             this.setState({
                interest: doc.data().interests,
-               displayName: doc.data().displayName
+               displayName: doc.data().displayName,
+               photoURL: doc.data().photoURL
             })
         })
     }
@@ -159,7 +161,7 @@ class PostPage extends Component {
         if(!this.state.title || !this.state.description){
         alert("You must fill in all fields!")
         }else{
-        fs.addPost(this.props.authUser.uid, this.state.displayName, this.state.title, this.state.description, this.state.interest[this.state.value]);
+        fs.addPost(this.props.authUser.uid, this.state.displayName, this.state.title, this.state.description, this.state.interest[this.state.value], this.state.photoURL);
 
         }
     }
