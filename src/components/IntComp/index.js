@@ -5,10 +5,13 @@ import Search from './Search';
 import OptionList from './OptionList';
 import InterestList from './InterestList';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import AuthUserContext from '../../AuthUserContext';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
+
+import * as routes from '../../constants';
 import './interestList.css';
 
 //require('normalize-css');
@@ -1909,6 +1912,9 @@ const inter =  [
     }
 ]; 
 
+const byPropKey = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
 
 class InterestPage extends Component {
   
@@ -1948,13 +1954,16 @@ class InterestPage extends Component {
     });
   }
 
-  submitInt(){
+  submitInt(event){
     console.log('submit');
     const sublist = []; 
     this.state.list.map( id =>{
       sublist.push(inter[id].inter); 
     })
     fs.updateUserInterests(this.props.authUser.uid, sublist);
+    alert("Interests Updated");
+    
+
   }
  
 
@@ -2011,6 +2020,7 @@ const mapStateToProps = (state) => ({
 
 
 const authCondition = (authUser) => !!authUser;
+
 
 export default compose(
   withAuthorization(authCondition),
