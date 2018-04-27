@@ -67,11 +67,12 @@ const muiTheme = getMuiTheme({
 class HomePage extends Component {
   constructor(props) {
     super(props);
-
+    this.getAllPosts = this.getAllPosts.bind(this)
     this.state = {
       users: null,
       displayName: '',
       interest: [],
+      following: []
     };
   }
 
@@ -91,6 +92,51 @@ class HomePage extends Component {
           }
         })
 
+    fs.getUser(this.props.authUser.uid).then(doc => {
+          if(doc.exists){
+            this.setState({
+              following: doc.data().friends
+            })
+          }
+        })
+
+  }
+
+  getAllPosts() {
+    var dbPromises = [];
+    var holdInterest = this.state.interest;
+    var holdFriends = this.state.following;
+
+    fs.getQueryPost()
+      .where("displayName", "==", "Ian Zimmer")
+      .where("tags", "==", "cocker")
+      .get()
+      .then((querySnapshots) => {
+          querySnapshots.forEach(doc => {
+            console.log(doc.data())
+          })
+      })
+
+   /*  for(var i = 0; i < holdInterest.length; i++){
+      for(var j = 0; j < holdFriends.length; j++){
+        dbPromises.push(
+          fs.getQueryPost()
+            .where("displayName", "==", holdFriends[j])
+            .orderBy("Date")
+            .get()
+        )
+      }
+    }
+    Promise.all(dbPromises)
+      .then((querySnapshots) => {
+        return querySnapshots.map(qs => qs.docs)
+                             .reduce((acc, docs) => [...acc, ...docs])
+      }).then((mathcingArticleRefs) => {
+        mathcingArticleRefs.map(doc => {
+          console.log(doc.data());
+        })
+      }) */
+    
   }
 
   render() {

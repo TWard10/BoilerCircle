@@ -122,9 +122,6 @@ class PostPage extends Component {
             tags: [],
             displayName: ''
         }
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleAddition = this.handleAddition.bind(this);
-        this.handleDrag = this.handleDrag.bind(this);
         this.mySubmit = this.mySubmit.bind(this);
     }
 
@@ -135,30 +132,7 @@ class PostPage extends Component {
             })
         })
     }
-    handleDelete(i){
-        const { tags } = this.state;
-        this.setState({
-         tags: tags.filter((tag, index) => index !== i),
-        });
-    }
-
-    handleAddition(tag){
-        const { tags } = this.state;
-        this.setState({tags: [...tags, ...[tag]]});
-    }
-
-    handleDrag(tag, currPos, newPos){
-        const tags = [...this.state.tags];
-        const newTags = tags.slice();
-
-        // mutate array
-        tags.splice(currPos, 1);
-        tags.splice(newPos, 0, tag);
-
-        // re-render
-        this.setState({ tags: newTags });
-    }
-
+   
     mySubmit(){
         if(!this.state.title || !this.state.description || this.state.tags.length < 1){
         alert("You must fill in all fields!")
@@ -170,7 +144,6 @@ class PostPage extends Component {
 
 
     render() {
-      const { tags } = this.state;
       return(
           <MuiThemeProvider muiTheme={muiTheme}>
           <div>
@@ -198,17 +171,10 @@ class PostPage extends Component {
           <br/>
           <br/>
           <br/>
-                 <label><strong>Tags</strong></label>
          <br/>
           <br/>
 
 
-               <ReactTags
-                            tags={this.state.tags}
-                            handleDelete={this.handleDelete}
-                            handleAddition={this.handleAddition}
-                            handleDrag={this.handleDrag}
-                        />
 
                         <footer>
                         <RaisedButton
