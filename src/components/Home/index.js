@@ -205,11 +205,13 @@ class HomePage extends Component {
         avURL = (<img className='resize' src={this.state.avatarURL} />)
       }else{
         fs.getUser(this.props.authUser.uid).then(doc => {
-          this.setState({
-            avatarURL: doc.data().photoURL
-          })
+          
+            this.setState({
+              avatarURL: doc.data().photoURL
+            })
+
         })
-        avURL = (<img className='resize' src = {this.state.avatarURL} />)
+        avURL = this.state.avatarURL;
       }
         console.log(this.state.interest)
       const interestList = this.state.interest.map((inter)=>{
@@ -224,7 +226,7 @@ class HomePage extends Component {
               <Paper style={styles.paper}>
                   <Paper style={styles.insidepaper} zDepth = {0}>
                     <br/>
-                    {avURL}
+                    <img className='resize' src={this.state.avatarURL}></img>
                   </Paper>
                     <br/>
                    <Divider inset={true} style={styles.divider}/>
