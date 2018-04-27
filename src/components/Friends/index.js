@@ -143,6 +143,7 @@ class FriendsPage extends Component {
             })
         });
       const { people, showPaper } = this.state
+      
       return(
         <MuiThemeProvider muiTheme={muiTheme}>
         <div className = 'pageBackground'>
