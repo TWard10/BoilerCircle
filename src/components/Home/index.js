@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import withAuthorization from '../../withAuthorization';
-import { firebase } from '../../firebase';
+import firebase from 'firebase';
 import './index.css'
 import { RaisedButton, Avatar, Paper, FlatButton, MenuItem, TextField,Divider, List, ListItem, Subheader  } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -72,8 +72,8 @@ const muiTheme = getMuiTheme({
     },
 
     filler: {
-      height: '60%',
-      width: 800,
+      height: '80%',
+      width: 1200,
       position: "fixed",
       top: "50%",
       left: "60%",
@@ -88,18 +88,25 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.getAllPosts = this.getAllPosts.bind(this)
+    this.makepost = this.makepost.bind(this);
+    this.filterSearch = this.filterSearch.bind(this);
+    this.getImage = this.getImage.bind(this);
+    this.clear = this.clear.bind(this);
     this.state = {
       users: null,
       displayName: '',
       interest: [],
       avatarURL: '',
-      posts: [], 
-      following: []
+      posts: [],
+      following: [],
+      postImage: ''
     };
+
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { onSetUsers } = this.props;
+
     fs.getUser(this.props.authUser.uid).then(doc => {
           if(doc.exists){
             this.setState({
@@ -124,79 +131,117 @@ class HomePage extends Component {
 
   }
 
+  getImage(image){
+    firebase.storage().ref().child(image).getDownloadURL().then((url) => {
+      this.setState({
+        postImage: url
+      })
+    })
+  }
+
+  clear(){
+    this.setState({
+      posts:[]
+    })
+  }
+
   getAllPosts() {
+    console.log("check");
     var dbPromises = [];
     var holdInterest = this.state.interest;
     var holdFriends = this.state.following;
 
-    fs.getQueryPost()
-      .where("displayName", "==", "Ian Zimmer")
-      .where("tags", "==", "cocker")
-      .get()
-      .then((querySnapshots) => {
-          querySnapshots.forEach(doc => {
-            console.log(doc.data())
-          })
-      })
+    this.clear();
 
-   /*  for(var i = 0; i < holdInterest.length; i++){
+   for(var i = 0; i < holdInterest.length; i++){
       for(var j = 0; j < holdFriends.length; j++){
-        dbPromises.push(
+        console.log(holdFriends[j] + " ::: " + holdInterest[i])
           fs.getQueryPost()
-            .where("displayName", "==", holdFriends[j])
-            .orderBy("Date")
+            .where('displayName', '==', holdFriends[j])
+            .where('tags', '==', holdInterest[i])
             .get()
-        )
+            .then(doc => {
+                doc.forEach((mydoc) => {
+                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description, mydoc.data().photoURL)
+                })
+            })
       }
     }
-    Promise.all(dbPromises)
-      .then((querySnapshots) => {
-        return querySnapshots.map(qs => qs.docs)
-                             .reduce((acc, docs) => [...acc, ...docs])
-      }).then((mathcingArticleRefs) => {
-        mathcingArticleRefs.map(doc => {
-          console.log(doc.data());
-        })
-      }) */
-    
+
+    dbPromises.forEach((doc) => {
+      doc.get().then(doc => {
+        console.log(doc.title);
+      })
+    })
+
+
   }
 
-  makepost(tag, user, title, disc){
+  filterSearch(item){
+    console.log("check");
+    var dbPromises = [];
+    var holdInterest = this.state.interest;
+    var holdFriends = this.state.following;
 
-   
+    this.clear();
+      for(var j = 0; j < holdFriends.length; j++){
+          fs.getQueryPost()
+            .where('displayName', '==', holdFriends[j])
+            .where('tags', '==', item)
+            .get()
+            .then(doc => {
+                doc.forEach((mydoc) => {
+                  this.makepost(mydoc.data().tags, mydoc.data().displayName, mydoc.data().title, mydoc.data().description, mydoc.data().photoURL)
+                })
+            })
+    }
 
-    var temp = 
-        <div>
+    dbPromises.forEach((doc) => {
+      doc.get().then(doc => {
+        console.log(doc.title);
+      })
+    })
+  }
+
+  makepost(tag, user, title, disc, photo){
+    //this.getImage(photo);l
+    const hold = <div>
+
          <ListItem
-    
-    leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
-    rightAvatar = {<RaisedButton label={user} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />}
+
+
+          leftAvatar = {<Avatar size={85} src={photo} />}
+          /* leftAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" />} */
+          rightAvatar = {<RaisedButton label={tag} disabled={true} disabledBackgroundColor="#ffdc52" disabledLabelColor="#424242" labelStyle={{height: '50px'}}/>}
               
-        primaryText={
-                <p>{title}</p>
-    
-              }
-    
+          primaryText={
+                  <p>{user}</p>
+
+                }
+
               secondaryText={
                 
-      <p><span style={{color: white}}>
+          <p><span style={{color: white}}>
                   {disc}
              </span> </p>
               }
               secondaryTextLines={2}
             />
-            <Divider inset={true} />;
-    </div>;
+          
+      </div>
+        ;
 
-  const arr = this.state.post.concat(temp);
 
+  //const newArr = this.state.posts.concat(hold);
+  console.log(this.state.posts);
   this.setState({
-    post: arr
+    posts: this.state.posts.concat(hold)
   });
-    
+
   }
 
   render() {
+    console.log('posts', this.state.posts)
 
       const { users} = this.state;
       let {avatarURL} = this.state;
@@ -205,26 +250,33 @@ class HomePage extends Component {
         avURL = (<img className='resize' src={this.state.avatarURL} />)
       }else{
         fs.getUser(this.props.authUser.uid).then(doc => {
-          this.setState({
-            avatarURL: doc.data().photoURL
-          })
+
+            this.setState({
+              avatarURL: doc.data().photoURL
+            })
+
         })
-        avURL = (<img className='resize' src = {this.state.avatarURL} />)
+        avURL = this.state.avatarURL;
       }
-        console.log(this.state.interest)
-      const interestList = this.state.interest.map((inter)=>{
-          return <RaisedButton label={inter} disabled={true} fullWidth={true} disabledBackgroundColor={"#ffdc52"} disabledLabelColor={"#424242"} label={inter} labelColor={"#424242"}/>
+      const allPosts = this.state.posts.map((item) => {
+        console.log(item)
+        return item;
       })
-      console.log(interestList)
+      const interestList = this.state.interest.map((inter)=>{
+          return <RaisedButton onClick={e => this.filterSearch(inter)} className="padded" label={inter} value={inter} fullWidth={true} backgroundColor={"#ffdc52"} labelColor={"#424242"} label={inter} labelColor={"#424242"}/>
+      })
+
+
     return (
       <MuiThemeProvider muiTheme = {muiTheme}>
+
       <div className='pageBackground'>
         <div className='row'>
             <div className='column'>
               <Paper style={styles.paper}>
                   <Paper style={styles.insidepaper} zDepth = {0}>
                     <br/>
-                    {avURL}
+                    <img className='resize' src={this.state.avatarURL}></img>
                   </Paper>
                     <br/>
                    <Divider inset={true} style={styles.divider}/>
@@ -237,18 +289,18 @@ class HomePage extends Component {
                       <h3>Interests</h3>
                       </Paper>
                     <div className='scroll'>
+                      <RaisedButton onClick={this.getAllPosts} className="padded" label={"Get all posts"} fullWidth={true} backgroundColor={"#ffdc52"} labelColor={"#424242"} labelColor={"#424242"}/>
                       {interestList}
                     </div>
                 </Paper>
             </div>
             <div>
                <Paper style={styles.filler}>
-               
-             <h1>Feed</h1>
-            
+
+             
                <div className="scroll">
                <List>
-              
+              {allPosts}
               </List>
 
                  </div>

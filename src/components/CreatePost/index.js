@@ -5,10 +5,13 @@ import AuthUserContext from '../../AuthUserContext';
 import { WithContext as ReactTags } from 'react-tag-input';
 import withAuthorization from '../../withAuthorization';
 import { auth, fs } from '../../firebase';
-import { Paper, TextField, RaisedButton } from 'material-ui'
+import { Paper, TextField, RaisedButton, DropDownMenu, MenuItem } from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import './index.css';
+import { fullWhite } from 'material-ui/styles/colors';
+import * as routes from '../../constants';
+import { Link, withRouter } from 'react-router-dom';
 
 
 const muiTheme = getMuiTheme({
@@ -28,10 +31,18 @@ const muiTheme = getMuiTheme({
           "color": "#424242"
       },
       "menuItem": {
-          "selectedTextColor": "rgba(0, 0, 0, 0.26)",
-          "hoverColor": "#616161",
-          "rightIconDesktopFill": "rgba(0, 0, 0, 0.26)"
-      }
+          "selectedTextColor": "#ffffff",
+          "hoverColor": "#ffdc52",
+         "textColor": "#ffdc52",
+         
+      },
+  "dropDownMenu": {
+            "accentColor": "#ffdc52"
+        },
+    "textField": {
+              "textColor": "#ffdc52"
+          },
+       
   });
 
 
@@ -104,6 +115,9 @@ const muiTheme = getMuiTheme({
           left: "70%",
           overflow:'hidden'
         },
+        customWidth: {
+              width: 400,
+            },
       };
 
 
@@ -120,35 +134,58 @@ class PostPage extends Component {
             title: '',
             description: '',
             tags: [],
-            displayName: ''
+            displayName: '',
+            value: 0,
+            interest: [],
+            photoURL: ''
+
         }
         this.mySubmit = this.mySubmit.bind(this);
     }
 
+
+    handleChange = (event, index, value) => this.setState({value});
+
+
     componentDidMount(){
         fs.getUser(this.props.authUser.uid).then(doc => {
             this.setState({
-                displayName: doc.data().displayName
+               interest: doc.data().interests,
+               displayName: doc.data().displayName,
+               photoURL: doc.data().photoURL
             })
         })
     }
-   
+
+
+
     mySubmit(){
-        if(!this.state.title || !this.state.description || this.state.tags.length < 1){
+        if(!this.state.title || !this.state.description){
         alert("You must fill in all fields!")
         }else{
-        fs.addPost(this.props.authUser.uid, this.state.displayName, this.state.title, this.state.description, this.state.tags);
+        fs.addPost(this.props.authUser.uid, this.state.displayName, this.state.title, this.state.description, this.state.interest[this.state.value], this.state.photoURL);
 
         }
     }
 
 
     render() {
+
+      // const interestList = this.state.interest.map((inter)=>{
+
+      //             return  <MenuItem    primaryText = {inter}/>
+      //         })
+
+
       return(
+
+
+
           <MuiThemeProvider muiTheme={muiTheme}>
-          <div>
+          <div className='pageBackground'>
           <Paper style={styles.paper} zDepth={5} >
 
+<br/><br/><br/><br/><br/><br/><br/><br/>
 
             <div>
           <TextField className = "textbox"
@@ -161,27 +198,43 @@ class PostPage extends Component {
           <br/>
           <br/>
           <br/>
+          <div>
           <TextField className = "textbox"
                type="text"
-               placeholder="Tell us something about your interest(s)"
+               textColor = "#ffdc52"
+               placeholder="Tell us about your interest"
                onChange={event => this.setState(byPropKey('description', event.target.value))}
                />
+               </div>
 
+   <br/>
           <br/>
           <br/>
+<div>
+<DropDownMenu
+          value={this.state.value}
+          onChange={this.handleChange}
+          style={styles.customWidth}
+          autoWidth={false}
+        >
+{ this.state.interest.map((inter, index) =>
+  <MenuItem primaryText = {inter} value={index}/>
+)}
+</DropDownMenu>
+</div>
+
+
+
+   <br/>
           <br/>
-         <br/>
           <br/>
-
-
-
                         <footer>
-                        <RaisedButton
+                        <Link to={routes.HOME}  style={{ textDecoration: 'none' }}><RaisedButton
         label="POST"
         style={styles.button}
         backgroundColor = "#424242"
         onClick = {this.mySubmit}
-        />
+        /></Link>
                             </footer>
 
             </Paper>
